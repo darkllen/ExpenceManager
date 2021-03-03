@@ -8,13 +8,9 @@ namespace ExpenceManager
     {
         private double amount { get; set; }
         private string currency { get; set; }
-
         private Category category { get; set; }
-
         private string description { get; set; }
-
         private DateTime date_time { get; set; }
-
         private string file { get; set; }
 
         public Transaction (

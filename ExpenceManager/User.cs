@@ -8,13 +8,9 @@ namespace ExpenceManager
     {
         private string name { get; }
         private string surname { get; }
-
         private string email { get; set; }
-
         private List<Wallet> wallets { get; }
-
         private List<Wallet> wallets_shared { get; }
-
         private List<Category> categories { get; }
 
         public User(string name, string surname, string email)
@@ -27,14 +23,20 @@ namespace ExpenceManager
             categories = new List<Category>();
         }
 
-        public void add_wallet()
+        public void add_wallet(Wallet wallet)
         {
-
+            if (wallet.get_owner()==this && !wallets.contains(wallet)){
+                wallets.add(wallet);
+            }
         }
 
         public void share_wallet_with_user(Wallet wallet, User user)
         {
-
+            if (wallets.contains(wallet) && !user.wallets_shared.contains(wallet)){
+                user.wallets_shared.add(wallet);
+            } else {
+            
+            }
         }
 
         public void allow_category(Wallet wallet, Category category)
