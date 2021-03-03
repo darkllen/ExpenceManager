@@ -6,9 +6,9 @@ namespace ExpenceManager
 {
     public class Category
     {
-        private string name { get; set; }
-        private string description { get; set; }
-        private string icon { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public string icon { get; set; }
 
         public Category(string name, string description, string icon)
         {

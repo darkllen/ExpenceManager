@@ -6,12 +6,12 @@ namespace ExpenceManager
 {
     public class Transaction
     {
-        private double amount { get; set; }
-        private string currency { get; set; }
-        private Category category { get; set; }
-        private string description { get; set; }
-        private DateTime date_time { get; set; }
-        private string file { get; set; }
+        public double amount { get; set; }
+        public string currency { get; set; }
+        public Category category { get; set; }
+        public string description { get; set; }
+        public DateTime date_time { get; set; }
+        public string file { get; set; }
 
         public Transaction (
             double amount,
