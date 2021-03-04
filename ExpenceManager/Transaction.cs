@@ -19,6 +19,7 @@ namespace ExpenceManager
             Category category, 
             string description,
             DateTime date_time,
+            //path to file
             string file)
         {
             this.amount = amount;

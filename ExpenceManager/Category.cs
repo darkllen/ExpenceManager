@@ -8,6 +8,7 @@ namespace ExpenceManager
     {
         public string name { get; set; }
         public string description { get; set; }
+        //path to icon
         public string icon { get; set; }
 
         public Category(string name, string description, string icon)
