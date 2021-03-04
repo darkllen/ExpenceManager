@@ -7,6 +7,7 @@ namespace ExpenceManager.Tests
 
     public class UserTest
     {
+
         [Fact]
         public void test_creation_wallet()
         {
