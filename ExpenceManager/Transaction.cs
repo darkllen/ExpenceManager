@@ -4,7 +4,7 @@ namespace ExpenceManager
 {
     public class Transaction
     {
-        public double amount { get; set; }
+        public decimal amount { get; set; }
         public string currency { get; set; }
         public Category category { get; set; }
         public string description { get; set; }
@@ -12,7 +12,7 @@ namespace ExpenceManager
         public string file { get; set; }
 
         public Transaction (
-            double amount,
+            decimal amount,
             string currency,
             Category category, 
             string description,

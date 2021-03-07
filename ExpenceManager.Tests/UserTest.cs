@@ -67,7 +67,7 @@ namespace ExpenceManager.Tests
 
                 var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
 
-                Assert.Throws<User.UserException>(() => user.share_wallet_with_user(wrong_id, user2));
+                Assert.Throws<UserException>(() => user.share_wallet_with_user(wrong_id, user2));
             }
             
             /// <summary>
@@ -79,7 +79,7 @@ namespace ExpenceManager.Tests
                 var user = new User("user", "user", "mail");
                 var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
 
-                Assert.Throws<User.UserException>(() => user.share_wallet_with_user(id, user));
+                Assert.Throws<UserException>(() => user.share_wallet_with_user(id, user));
             }
 
             /// <summary>
@@ -93,7 +93,7 @@ namespace ExpenceManager.Tests
                 var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
                 user.share_wallet_with_user(id, user2);
 
-                Assert.Throws<User.UserException>(() => user.share_wallet_with_user(id, user2));
+                Assert.Throws<UserException>(() => user.share_wallet_with_user(id, user2));
             }
         }
 
@@ -108,7 +108,7 @@ namespace ExpenceManager.Tests
                 var user = new User("user", "user", "mail");
                 var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
 
-                Assert.Throws<User.UserException>(() => user.switch_category_permisiion(id, new Category("s", "s", "s")));
+                Assert.Throws<UserException>(() => user.switch_category_permisiion(id, new Category("s", "s", "s")));
             }
 
             /// <summary>
@@ -121,7 +121,7 @@ namespace ExpenceManager.Tests
                 var user = new User("user", "user", "mail");
                 user.create_new_wallet("wallet", 0, "wallet", "USD");
 
-                Assert.Throws<User.UserException>(() => user.switch_category_permisiion(wrong_id, new Category("s", "s", "s")));
+                Assert.Throws<UserException>(() => user.switch_category_permisiion(wrong_id, new Category("s", "s", "s")));
             }
 
             /// <summary>
@@ -138,7 +138,7 @@ namespace ExpenceManager.Tests
                 user.switch_category_permisiion(id, category);
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                Assert.Throws<User.WalletException>(() => user.add_transaction(id, transaction));
+                Assert.Throws<WalletException>(() => user.add_transaction(id, transaction));
 
                 user.switch_category_permisiion(id, category);
                 user.add_transaction(id, new Transaction(23, "USD", category, "S", DateTime.Today, "S"));
@@ -161,7 +161,7 @@ namespace ExpenceManager.Tests
                 user.create_new_wallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                Assert.Throws<User.UserException>(() => user.add_transaction(wrong_id, transaction));
+                Assert.Throws<UserException>(() => user.add_transaction(wrong_id, transaction));
             }
 
             /// <summary>
@@ -177,7 +177,7 @@ namespace ExpenceManager.Tests
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
                 user.add_transaction(id, transaction);
-                Assert.Throws<User.WalletException>(() => user.add_transaction(id, transaction));
+                Assert.Throws<WalletException>(() => user.add_transaction(id, transaction));
             }
 
             /// <summary>
@@ -195,7 +195,7 @@ namespace ExpenceManager.Tests
                 user2.categories.Add(category);
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                Assert.Throws<User.WalletException>(() => user.add_transaction(id, transaction));
+                Assert.Throws<WalletException>(() => user.add_transaction(id, transaction));
             }
 
             /// <summary>
@@ -211,7 +211,7 @@ namespace ExpenceManager.Tests
                 user.create_new_wallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                Assert.Throws<User.UserException>(() => user.remove_transaction(wrong_id, transaction));
+                Assert.Throws<UserException>(() => user.remove_transaction(wrong_id, transaction));
             }
 
             /// <summary>
@@ -244,7 +244,7 @@ namespace ExpenceManager.Tests
                 user.categories.Add(category);
                 user.create_new_wallet("wallet", 0, "wallet", "USD");
 
-                Assert.Throws<User.UserException>(() => user.get_10_transactions(wrong_id, start));
+                Assert.Throws<UserException>(() => user.get_10_transactions(wrong_id, start));
             }
 
             /// <summary>
@@ -408,7 +408,7 @@ namespace ExpenceManager.Tests
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
                 user.add_transaction(id, transaction);
 
-                Assert.Throws<User.UserException>(() => user.get_this_month_profit(-1));
+                Assert.Throws<UserException>(() => user.get_this_month_profit(-1));
             }
 
             /// <summary>
@@ -446,7 +446,7 @@ namespace ExpenceManager.Tests
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
                 user.add_transaction(id, transaction);
 
-                Assert.Throws<User.UserException>(() => user.get_this_month_spends(-1));
+                Assert.Throws<UserException>(() => user.get_this_month_spends(-1));
             }
         }
     }
