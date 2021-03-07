@@ -4,28 +4,28 @@ namespace ExpenceManager
 {
     public class Transaction
     {
-        public decimal amount { get; set; }
-        public string currency { get; set; }
-        public Category category { get; set; }
-        public string description { get; set; }
-        public DateTime date_time { get; set; }
-        public string file { get; set; }
+        public decimal Amount { get; set; }
+        public string Currency { get; set; }
+        public Category Category { get; set; }
+        public string Description { get; set; }
+        public DateTime DateTime { get; set; }
+        public string File { get; set; }
 
         public Transaction (
             decimal amount,
             string currency,
             Category category, 
             string description,
-            DateTime date_time,
+            DateTime dateTime,
             //path to file
             string file)
         {
-            this.amount = amount;
-            this.currency = currency;
-            this.category = category;
-            this.description = description;
-            this.date_time = date_time;
-            this.file = file;
+            Amount = amount;
+            Currency = currency;
+            Category = category;
+            Description = description;
+            DateTime = dateTime;
+            File = file;
         }
     }
 }

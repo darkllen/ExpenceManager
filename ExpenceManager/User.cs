@@ -6,24 +6,24 @@ namespace ExpenceManager
     public class User
     {
         //user can't change name or surname
-        public string name { get; }
-        public string surname { get; }
+        public string Name { get; }
+        public string Surname { get; }
         //user can change email
-        public string email { get; set; }
+        public string Email { get; set; }
         //wallets are private, so User methods are needed to be used to work with wallets
-        private List<Wallet> wallets { get; }
-        private List<Wallet> wallets_shared { get; }
+        private List<Wallet> Wallets { get; }
+        private List<Wallet> WalletsShared { get; }
         //categories are public, so we can change them easy
-        public List<Category> categories { get; }
+        public List<Category> Categories { get; }
 
         public User(string name, string surname, string email)
         {   
-            this.name = name;
-            this.surname = surname;
-            this.email = email;
-            wallets = new List<Wallet>();
-            wallets_shared = new List<Wallet>();
-            categories = new List<Category>();
+            Name = name;
+            Surname = surname;
+            Email = email;
+            Wallets = new List<Wallet>();
+            WalletsShared = new List<Wallet>();
+            Categories = new List<Category>();
         }
 
         /// <summary>
@@ -31,131 +31,131 @@ namespace ExpenceManager
         /// This is the only way to create wallet.
         /// </summary>
         /// <param name="name">wallet name</param>
-        /// <param name="start_balance">wallet start ballance</param>
+        /// <param name="startBalance">wallet start ballance</param>
         /// <param name="description">wallet description</param>
         /// <param name="currency">wallet currency</param>
         /// <returns>id of created wallet</returns>
-        public int create_new_wallet(string name,
-                                     decimal start_balance,
-                                     string description,
-                                     string currency)
+        public int CreateNewWallet(string name,
+                                   decimal startBalance,
+                                   string description,
+                                   string currency)
         {
             //create wallet and asign it to user
-            Wallet wallet = new Wallet(name, start_balance, description, currency, categories);
-            wallets.Add(wallet);
-            return wallet.id;
+            Wallet wallet = new Wallet(name, startBalance, description, currency, Categories);
+            Wallets.Add(wallet);
+            return wallet.Id;
         }
 
         /// <summary>
         /// get all wallets ids of user to use them later in User methods
         /// </summary>
         /// <returns>List with ids of wallets, which are owned by user</returns>
-        public List<int> get_wallets_ids()
+        public List<int> GetWalletsIds()
         {
-            return convert_wallets_ids(wallets);
+            return ConvertWalletsIds(Wallets);
         }
         /// <summary>
         /// get all shared wallets ids of user to use them later in User methods
         /// </summary>
         /// <returns>List with ids of wallets, which are shared with user</returns>
-        public List<int> get_shared_wallets_ids()
+        public List<int> GetSharedWalletsIds()
         {
-            return convert_wallets_ids(wallets_shared);
+            return ConvertWalletsIds(WalletsShared);
         }
 
         /// <summary>
         /// share wallet with another user
         /// </summary>
-        /// <param name="wallet_id">wallet id</param>
+        /// <param name="walletId">wallet id</param>
         /// <param name="user">user to share wallet with</param>
-        public void share_wallet_with_user(int wallet_id, User user)
+        public void ShareWalletWithUser(int walletId, User user)
         {
-            Wallet to_share = get_own_wallet_by_id(wallet_id);
+            Wallet toShare = GetOwnWalletById(walletId);
 
             if (user == this) throw new UserException("can not share wallet with owner");
-            if (to_share is null) throw new UserException("user hasn't this wallet");
-            if (user.wallets_shared.Contains(to_share)) throw new UserException("wallet has been already shared with this user");
+            if (toShare is null) throw new UserException("user hasn't this wallet");
+            if (user.WalletsShared.Contains(toShare)) throw new UserException("wallet has been already shared with this user");
 
-            user.wallets_shared.Add(to_share);
+            user.WalletsShared.Add(toShare);
         }
 
         /// <summary>
         /// change categories accessebility for wallet.
         /// </summary>
-        /// <param name="wallet_id">wallet id</param>
+        /// <param name="walletId">wallet id</param>
         /// <param name="category">category to change</param>
-        public void switch_category_permisiion(int wallet_id, Category category)
+        public void SwitchCategoryPermisiion(int walletId, Category category)
 
         {
-            Wallet wallet = get_own_wallet_by_id(wallet_id);
+            Wallet wallet = GetOwnWalletById(walletId);
 
-            if (!categories.Contains(category)) throw new UserException("user hasn't this category");
+            if (!Categories.Contains(category)) throw new UserException("user hasn't this category");
             if (wallet is null) throw new UserException("user hasn't this wallet");
 
-            if (wallet.restricted_categories.Contains(category)) wallet.restricted_categories.Remove(category);
-            else wallet.restricted_categories.Add(category);
+            if (wallet.RestrictedCategories.Contains(category)) wallet.RestrictedCategories.Remove(category);
+            else wallet.RestrictedCategories.Add(category);
         }
 
         /// <summary>
         /// add transaction to wallet
         /// </summary>
-        /// <param name="wallet_id">wallet id</param>
+        /// <param name="walletId">wallet id</param>
         /// <param name="transaction">transaction to add</param>
-        public void add_transaction(int wallet_id, Transaction transaction)
+        public void AddTransaction(int walletId, Transaction transaction)
             
         {
-            get_wallet_or_exception(wallet_id).add_transaction(transaction);
+            GetWalletOrException(walletId).AddTransaction(transaction);
         }
 
         /// <summary>
         /// remove transaction from wallet
         /// </summary>
-        /// <param name="wallet_id">wallet id</param>
+        /// <param name="walletId">wallet id</param>
         /// <param name="transaction">transaction to remove</param>
-        public void remove_transaction(int wallet_id, Transaction transaction)
+        public void RemoveTransaction(int walletId, Transaction transaction)
         {
-            get_wallet_or_exception(wallet_id).remove_transaction(transaction);
+            GetWalletOrException(walletId).RemoveTransaction(transaction);
         }
 
         /// <summary>
         /// get 10 first transactions starts from certain position
         /// </summary>
-        /// <param name="wallet_id">wallet id</param>
+        /// <param name="walletId">wallet id</param>
         /// <param name="start">position to start from</param>
         /// <returns>List with 10 or less transactions</returns>
-        public List<Transaction> get_10_transactions(int wallet_id, int start)
+        public List<Transaction> Get10Transactions(int walletId, int start)
         {
-            return get_wallet_or_exception(wallet_id).get_10_transactions(start);
+            return GetWalletOrException(walletId).Get10Transactions(start);
         }
 
         /// <summary>
         /// show wallet current balance
         /// </summary>
-        /// <param name="wallet_id">wallet id</param>
+        /// <param name="walletId">wallet id</param>
         /// <returns>curent balance of wallet</returns>
-        public decimal get_wallet_ballance(int wallet_id)
+        public decimal GetWalletBallance(int walletId)
         {
-            return get_wallet_or_exception(wallet_id).curr_balance;
+            return GetWalletOrException(walletId).CurrBalance;
         }
 
         /// <summary>
         /// get profit for this wallet started from the first day of current month
         /// </summary>
-        /// <param name="wallet_id">walet id</param>
+        /// <param name="walletId">walet id</param>
         /// <returns>amount of profit</returns>
-        public decimal get_this_month_profit(int wallet_id)
+        public decimal GetThisMonthProfit(int walletId)
         {
-            return get_wallet_or_exception(wallet_id).month_profit();
+            return GetWalletOrException(walletId).MonthProfit();
         }
 
         /// <summary>
         /// get spends for this wallet started from the first day of current month
         /// </summary>
-        /// <param name="wallet_id">wallet id</param>
+        /// <param name="walletId">wallet id</param>
         /// <returns>amount of spends</returns>
-        public decimal get_this_month_spends(int wallet_id)
+        public decimal GetThisMonthSpends(int walletId)
         {
-            return get_wallet_or_exception(wallet_id).month_spends();
+            return GetWalletOrException(walletId).MonthSpends();
         }
 
 
@@ -165,9 +165,9 @@ namespace ExpenceManager
         /// </summary>
         /// <param name="wallets">List of wallets></param>
         /// <returns>List of ids</returns>
-        private List<int> convert_wallets_ids(List<Wallet> wallets)
+        private List<int> ConvertWalletsIds(List<Wallet> wallets)
         {
-            Converter<Wallet, int> map = (x) => x.id;
+            static int map(Wallet x) => x.Id;
             return wallets.ConvertAll(map);
         }
 
@@ -176,9 +176,9 @@ namespace ExpenceManager
         /// </summary>
         /// <param name="id">wallet id</param>
         /// <returns>wallet with this id</returns>
-        private Wallet get_own_wallet_by_id(int id)
+        private Wallet GetOwnWalletById(int id)
         {
-            return get_wallet_by_id(wallets, id);
+            return GetWalletById(Wallets, id);
         }
 
         /// <summary>
@@ -186,9 +186,9 @@ namespace ExpenceManager
         /// </summary>
         /// <param name="id">wallet id</param>
         /// <returns>wallet with this id</returns>
-        private Wallet get_shared_wallet_by_id(int id)
+        private Wallet GetSharedWalletById(int id)
         {
-           return get_wallet_by_id(wallets_shared, id);
+           return GetWalletById(WalletsShared, id);
         }
 
         /// <summary>
@@ -197,22 +197,22 @@ namespace ExpenceManager
         /// <param name="wallets">List of wallets</param>
         /// <param name="id">wallet id</param>
         /// <returns>wallet with this id</returns>
-        private Wallet get_wallet_by_id(List<Wallet> wallets, int id)
+        private Wallet GetWalletById(List<Wallet> wallets, int id)
         {
-            Predicate<Wallet> id_predicate = (x) => x.id == id;
-            return wallets.Find(id_predicate);
+            bool idPredicate(Wallet x) => x.Id == id;
+            return wallets.Find(idPredicate);
         }
 
         /// <summary>
         /// search Wallet with id among all wallets of this user (own and shared)
         /// throws UserException id there is no such Wallet
         /// </summary>
-        /// <param name="wallet_id">wallet id</param>
+        /// <param name="walletId">wallet id</param>
         /// <returns>wallet with this id</returns>
-        private Wallet get_wallet_or_exception(int wallet_id)
+        private Wallet GetWalletOrException(int walletId)
         {
-            Wallet wallet = get_own_wallet_by_id(wallet_id);
-            if (wallet is null) wallet = get_shared_wallet_by_id(wallet_id);
+            Wallet wallet = GetOwnWalletById(walletId);
+            if (wallet is null) wallet = GetSharedWalletById(walletId);
             if (wallet is null) throw new UserException("user hasn't this wallet");
             return wallet;
         }
@@ -220,94 +220,94 @@ namespace ExpenceManager
         private class Wallet
         {
             // field to imitate autogenerated id
-            private static int next_id = 0;
-            public int id { get; }
-            private string name { get; set; }
-            private decimal start_balance { get; }
-            public decimal curr_balance { get; set; }
-            public string description { get; set; }
-            private string currency { get; }
+            private static int NextId = 0;
+            public int Id { get; }
+            private string Name { get; set; }
+            private decimal StartBalance { get; }
+            public decimal CurrBalance { get; set; }
+            public string Description { get; set; }
+            private string Currency { get; }
 
-            private List<Transaction> transactions;
-            private List<Category> possible_categories;
-            public List<Category> restricted_categories { get; }
+            private List<Transaction> Transactions;
+            private List<Category> PossibleCategories;
+            public List<Category> RestrictedCategories { get; }
 
             public Wallet(
 
                 string name,
-                decimal start_balance,
+                decimal startBalance,
                 string description,
                 string currency,
-                List<Category> possible_categories)
+                List<Category> possibleCategories)
             {
-                this.name = name;
-                this.start_balance = start_balance;
-                this.description = description;
-                this.currency = currency;
-                //possible_categories of Wallet are always actual as they changed with any changes in User categories
-                this.possible_categories = possible_categories;
+                Name = name;
+                StartBalance = startBalance;
+                Description = description;
+                Currency = currency;
+                //possibleCategories of Wallet are always actual as they changed with any changes in User categories
+                PossibleCategories = possibleCategories;
 
-                id = next_id++;
-                curr_balance = start_balance;
+                Id = NextId++;
+                CurrBalance = startBalance;
 
-                transactions = new List<Transaction>();
-                restricted_categories = new List<Category>();
+                Transactions = new List<Transaction>();
+                RestrictedCategories = new List<Category>();
             }
 
             /// <summary>
             /// get 10 first transactions starts from certain position
             /// </summary>
-            /// <param name="start_place">position to start from</param>
+            /// <param name="startPlace">position to start from</param>
             /// <returns>List with 10 or less transactions</returns>
-            public List<Transaction> get_10_transactions(int start_place)
+            public List<Transaction> Get10Transactions(int startPlace)
             {
-                List<Transaction> returned_transactions = new List<Transaction>();
-                for (int i = start_place; i < start_place + 10 && i < transactions.Count; i++)
+                List<Transaction> returnedTransactions = new List<Transaction>();
+                for (int i = startPlace; i < startPlace + 10 && i < Transactions.Count; i++)
                 {
-                    returned_transactions.Add(transactions[i]);
+                    returnedTransactions.Add(Transactions[i]);
                 }
-                return returned_transactions;
+                return returnedTransactions;
             }
 
             /// <summary>
             /// add transaction to wallet if possible
             /// </summary>
             /// <param name="transaction">transaction to add</param>
-            public void add_transaction(Transaction transaction)
+            public void AddTransaction(Transaction transaction)
             {
-                if (transactions.Contains(transaction)) throw new WalletException("this transaction already exists in this wallet");
-                if (restricted_categories.Contains(transaction.category)) throw new WalletException("transaction category is restricted for this wallet");
-                if (!possible_categories.Contains(transaction.category)) throw new WalletException("transaction category is not possible for this wallet");
-                transactions.Add(transaction);
-                curr_balance += transaction.amount;
+                if (Transactions.Contains(transaction)) throw new WalletException("this transaction already exists in this wallet");
+                if (RestrictedCategories.Contains(transaction.Category)) throw new WalletException("transaction category is restricted for this wallet");
+                if (!PossibleCategories.Contains(transaction.Category)) throw new WalletException("transaction category is not possible for this wallet");
+                Transactions.Add(transaction);
+                CurrBalance += transaction.Amount;
             }
 
             /// <summary>
             /// remove transaction from wallet
             /// </summary>
             /// <param name="transaction">transaction to remove</param>
-            public void remove_transaction(Transaction transaction)
+            public void RemoveTransaction(Transaction transaction)
             {
-                transactions.Remove(transaction);
-                curr_balance -= transaction.amount;
+                Transactions.Remove(transaction);
+                CurrBalance -= transaction.Amount;
             }
 
             /// <summary>
             /// counting monthly spends
             /// </summary>
             /// <returns></returns>
-            public decimal month_spends()
+            public decimal MonthSpends()
             {
-                return counting_month_stats(Stats.Spends);
+                return CountingMonthStats(Stats.Spends);
             }
 
             /// <summary>
             /// counting monthly profit
             /// </summary>
             /// <returns></returns>
-            public decimal month_profit()
+            public decimal MonthProfit()
             {
-                return counting_month_stats(Stats.Profit);
+                return CountingMonthStats(Stats.Profit);
             }
 
             /// <summary>
@@ -315,7 +315,7 @@ namespace ExpenceManager
             /// </summary>
             /// <param name="stats">define count profit or spends</param>
             /// <returns>amount of monthly filtered transactions</returns>
-            private decimal counting_month_stats(Stats stats)
+            private decimal CountingMonthStats(Stats stats)
             {
                 Func<decimal, bool> cond = null;
                 switch (stats)
@@ -330,9 +330,9 @@ namespace ExpenceManager
 
                 DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
                 decimal sum = 0;
-                foreach (Transaction transaction in transactions)
+                foreach (Transaction transaction in Transactions)
                 {
-                    if (cond(transaction.amount) && transaction.date_time > dt) sum += transaction.amount;
+                    if (cond(transaction.Amount) && transaction.DateTime > dt) sum += transaction.Amount;
                 }
                 return sum;
             }

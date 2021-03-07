@@ -13,10 +13,10 @@ namespace ExpenceManager.Tests
             /// test wallet creation
             /// </summary>
             [Fact]
-            public void test_creation_wallet()
+            public void TestCreationWallet()
             {
                 var user = new User("user", "user", "mail");
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
                 Assert.IsType<int>(id);
             }
         }
@@ -27,11 +27,11 @@ namespace ExpenceManager.Tests
             /// test getting own wallets ids
             /// </summary>
             [Fact]
-            public void test_get_wallets_ids()
+            public void TestGetWalletsIds()
             {
                 var user = new User("user", "user", "mail");
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
-                var ids = user.get_wallets_ids();
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
+                var ids = user.GetWalletsIds();
                 Assert.Contains(id, ids);
             }
 
@@ -39,15 +39,15 @@ namespace ExpenceManager.Tests
             /// test getting shared wallets ids
             /// </summary>
             [Fact]
-            public void test_get_shared_wallets_ids()
+            public void TestGetSharedWalletsIds()
             {
                 var user = new User("user", "user", "mail");
                 var user2 = new User("user", "user", "mail");
 
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
-                user.share_wallet_with_user(id, user2);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
+                user.ShareWalletWithUser(id, user2);
 
-                var ids = user2.get_shared_wallets_ids();
+                var ids = user2.GetSharedWalletsIds();
 
                 Assert.Contains(id, ids);
             }
@@ -59,41 +59,41 @@ namespace ExpenceManager.Tests
             /// trying to share wrong wallet
             /// </summary>
             [Fact]
-            public void test_sharing_wrong_wallet()
+            public void TestSharingWrongWallet()
             {
-                var wrong_id = -1;
+                var wrongId = -1;
                 var user = new User("user", "user", "mail");
                 var user2 = new User("user", "user", "mail");
 
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
-                Assert.Throws<UserException>(() => user.share_wallet_with_user(wrong_id, user2));
+                Assert.Throws<UserException>(() => user.ShareWalletWithUser(wrongId, user2));
             }
             
             /// <summary>
             /// trying to share wallet with self
             /// </summary>
             [Fact]
-            public void test_sharing_with_self()
+            public void TestSharingWithSelf()
             {
                 var user = new User("user", "user", "mail");
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
-                Assert.Throws<UserException>(() => user.share_wallet_with_user(id, user));
+                Assert.Throws<UserException>(() => user.ShareWalletWithUser(id, user));
             }
 
             /// <summary>
             /// trying share wallet twice to one user
             /// </summary>
             [Fact]
-            public void test_sharing_twice()
+            public void TestSharingTwice()
             {
                 var user = new User("user", "user", "mail");
                 var user2 = new User("user", "user", "mail");
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
-                user.share_wallet_with_user(id, user2);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
+                user.ShareWalletWithUser(id, user2);
 
-                Assert.Throws<UserException>(() => user.share_wallet_with_user(id, user2));
+                Assert.Throws<UserException>(() => user.ShareWalletWithUser(id, user2));
             }
         }
 
@@ -103,45 +103,45 @@ namespace ExpenceManager.Tests
             /// trying to change permisiion on wrong category
             /// </summary>
             [Fact]
-            public void test_switch_permission_wrong_category()
+            public void TestSwitchPermissionWrongCategory()
             {
                 var user = new User("user", "user", "mail");
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
-                Assert.Throws<UserException>(() => user.switch_category_permisiion(id, new Category("s", "s", "s")));
+                Assert.Throws<UserException>(() => user.SwitchCategoryPermisiion(id, new Category("s", "s", "s")));
             }
 
             /// <summary>
             /// trying to change permisiion on category of wrong wallet
             /// </summary>
             [Fact]
-            public void test_switch_permission_category_wrong_wallet()
+            public void TestSwitchPermissionCategoryWrongWallet()
             {
-                var wrong_id = -1;
+                var wrongId = -1;
                 var user = new User("user", "user", "mail");
-                user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
-                Assert.Throws<UserException>(() => user.switch_category_permisiion(wrong_id, new Category("s", "s", "s")));
+                Assert.Throws<UserException>(() => user.SwitchCategoryPermisiion(wrongId, new Category("s", "s", "s")));
             }
 
             /// <summary>
             /// changing category permission test
             /// </summary>
             [Fact]
-            public void test_switch_permission_category()
+            public void TestSwitchPermissionCategory()
             {
                 var user = new User("user", "user", "mail");
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
+                user.Categories.Add(category);
 
-                user.switch_category_permisiion(id, category);
+                user.SwitchCategoryPermisiion(id, category);
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                Assert.Throws<WalletException>(() => user.add_transaction(id, transaction));
+                Assert.Throws<WalletException>(() => user.AddTransaction(id, transaction));
 
-                user.switch_category_permisiion(id, category);
-                user.add_transaction(id, new Transaction(23, "USD", category, "S", DateTime.Today, "S"));
+                user.SwitchCategoryPermisiion(id, category);
+                user.AddTransaction(id, new Transaction(23, "USD", category, "S", DateTime.Today, "S"));
             }
         }
 
@@ -152,82 +152,82 @@ namespace ExpenceManager.Tests
             /// trying to add transaction to a wrong wallet
             /// </summary>
             [Fact]
-            public void test_add_transaction_wrong_wallet()
+            public void TestAddTransactionWrongWallet()
             {
-                var wrong_id = -1;
+                var wrongId = -1;
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                Assert.Throws<UserException>(() => user.add_transaction(wrong_id, transaction));
+                Assert.Throws<UserException>(() => user.AddTransaction(wrongId, transaction));
             }
 
             /// <summary>
             /// trying to add two same transactions to one wallet
             /// </summary>
             [Fact]
-            public void test_add_two_same_transactions()
+            public void TestAddTwoSameTransactions()
             {
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                user.add_transaction(id, transaction);
-                Assert.Throws<WalletException>(() => user.add_transaction(id, transaction));
+                user.AddTransaction(id, transaction);
+                Assert.Throws<WalletException>(() => user.AddTransaction(id, transaction));
             }
 
             /// <summary>
             /// trying to create transaction with wrong category
             /// </summary>
             [Fact]
-            public void test_impossible_category_transactions()
+            public void TestImpossibleCategoryTransactions()
             {
                 var user = new User("user", "user", "mail");
                 var user2 = new User("user", "user", "mail");
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
-                user.share_wallet_with_user(id, user2);
+                user.ShareWalletWithUser(id, user2);
                 Category category = new Category("s", "s", "s");
-                user2.categories.Add(category);
+                user2.Categories.Add(category);
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                Assert.Throws<WalletException>(() => user.add_transaction(id, transaction));
+                Assert.Throws<WalletException>(() => user.AddTransaction(id, transaction));
             }
 
             /// <summary>
             /// trying to remove transaction of wrong wallet
             /// </summary>
             [Fact]
-            public void test_remove_transaction_wrong_wallet()
+            public void TestRemoveTransactionWrongWallet()
             {
-                var wrong_id = -1;
+                var wrongId = -1;
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                Assert.Throws<UserException>(() => user.remove_transaction(wrong_id, transaction));
+                Assert.Throws<UserException>(() => user.RemoveTransaction(wrongId, transaction));
             }
 
             /// <summary>
             /// test removing transaction from wallet
             /// </summary>
             [Fact]
-            public void test_remove_transaction()
+            public void TestRemoveTransaction()
             {
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                user.add_transaction(id, transaction);
-                user.remove_transaction(id, transaction);
+                user.AddTransaction(id, transaction);
+                user.RemoveTransaction(id, transaction);
             }
 
 
@@ -235,34 +235,34 @@ namespace ExpenceManager.Tests
             /// trying to get transactions from a wrong wallet
             /// </summary>
             [Fact]
-            public void test_get_transactions_wrong_wallet()
+            public void TestGetTransactionsWrongWallet()
             {
-                var wrong_id = -1;
+                var wrongId = -1;
                 var start = 0;
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
-                Assert.Throws<UserException>(() => user.get_10_transactions(wrong_id, start));
+                Assert.Throws<UserException>(() => user.Get10Transactions(wrongId, start));
             }
 
             /// <summary>
             /// test getting transactions from start
             /// </summary>
             [Fact]
-            public void test_get_transactions()
+            public void TestGetTransactions()
             {
                 var expected = 1;
                 var start = 0;
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                user.add_transaction(id, transaction);
-                var got = user.get_10_transactions(id, start);
+                user.AddTransaction(id, transaction);
+                var got = user.Get10Transactions(id, start);
                 Assert.Contains(transaction, got);
                 Assert.Equal(expected, got.Count);
             }
@@ -271,20 +271,20 @@ namespace ExpenceManager.Tests
             /// test getting transactions not from start
             /// </summary>
             [Fact]
-            public void test_get_transactions_not_from_start()
+            public void TestGetTransactionsNotFromStart()
             {
                 var expected = 1;
                 var start = 1;
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
                 var transaction2 = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                user.add_transaction(id, transaction);
-                user.add_transaction(id, transaction2);
-                var got = user.get_10_transactions(id, start);
+                user.AddTransaction(id, transaction);
+                user.AddTransaction(id, transaction2);
+                var got = user.Get10Transactions(id, start);
                 Assert.Contains(transaction2, got);
                 Assert.Equal(expected, got.Count);
             }
@@ -293,18 +293,18 @@ namespace ExpenceManager.Tests
             /// test getting transaction from value higher than transactions List length
             /// </summary>
             [Fact]
-            public void test_get_transactions_high_start()
+            public void TestGetTransactionsHighStart()
             {
                 var expected = 0;
                 var start = 1;
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                user.add_transaction(id, transaction);
-                var got = user.get_10_transactions(id, start);
+                user.AddTransaction(id, transaction);
+                var got = user.Get10Transactions(id, start);
                 Assert.Equal(expected, got.Count);
             }
 
@@ -312,21 +312,21 @@ namespace ExpenceManager.Tests
             /// test getting max possible num of transactions
             /// </summary>
             [Fact]
-            public void test_get_transactions_get_10()
+            public void TestGetTransactionsGet10()
             {
                 var expected = 10;
                 var start = 0;
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 for (int i = 0; i < 12; i++)
                 {
                     var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                    user.add_transaction(id, transaction);
+                    user.AddTransaction(id, transaction);
                 }
-                var got = user.get_10_transactions(id, start);
+                var got = user.Get10Transactions(id, start);
                 Assert.Equal(expected, got.Count);
             }
         }
@@ -337,39 +337,39 @@ namespace ExpenceManager.Tests
             /// test showing balance of wallet
             /// </summary>
             [Fact]
-            public void test_get_wallet_balance()
+            public void TestGetWalletBalance()
             {
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                user.add_transaction(id, transaction);
+                user.AddTransaction(id, transaction);
 
-                var balance = user.get_wallet_ballance(id);
-                Assert.Equal(transaction.amount, balance);
+                var balance = user.GetWalletBallance(id);
+                Assert.Equal(transaction.Amount, balance);
             }
 
             /// <summary>
             /// test changing balance after transactions
             /// </summary>
             [Fact]
-            public void test_get_wallet_balance_depends_on_transactions()
+            public void TestGetWalletBalanceDependsOnTransactions()
             {
                 var start = 0;
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                var id = user.create_new_wallet("wallet", start, "wallet", "USD");
+                user.Categories.Add(category);
+                var id = user.CreateNewWallet("wallet", start, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                user.add_transaction(id, transaction);
+                user.AddTransaction(id, transaction);
 
-                var balance = user.get_wallet_ballance(id);
-                Assert.Equal(transaction.amount, balance);
-                user.remove_transaction(id, transaction);
-                balance = user.get_wallet_ballance(id);
+                var balance = user.GetWalletBallance(id);
+                Assert.Equal(transaction.Amount, balance);
+                user.RemoveTransaction(id, transaction);
+                balance = user.GetWalletBallance(id);
                 Assert.Equal(start, balance);
             }
 
@@ -377,76 +377,76 @@ namespace ExpenceManager.Tests
             /// test getting month profit
             /// </summary>
             [Fact]
-            public void test_get_wallet_month_profit()
+            public void TestGetWalletMonthProfit()
             {
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
                 var transaction2 = new Transaction(23, "USD", category, "S", DateTime.Today.AddDays(-40), "S");
                 var transaction3 = new Transaction(-23, "USD", category, "S", DateTime.Today, "S");
-                user.add_transaction(id, transaction);
-                user.add_transaction(id, transaction2);
-                user.add_transaction(id, transaction3);
+                user.AddTransaction(id, transaction);
+                user.AddTransaction(id, transaction2);
+                user.AddTransaction(id, transaction3);
 
-                Assert.Equal(user.get_this_month_profit(id), transaction.amount);
+                Assert.Equal(user.GetThisMonthProfit(id), transaction.Amount);
             }
 
             /// <summary>
             /// trying to get month profit of wrong wallet
             /// </summary>
             [Fact]
-            public void test_get_wallet_month_profit_wrong_wallet()
+            public void TestGetWalletMonthProfitWrongWallet()
             {
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                user.add_transaction(id, transaction);
+                user.AddTransaction(id, transaction);
 
-                Assert.Throws<UserException>(() => user.get_this_month_profit(-1));
+                Assert.Throws<UserException>(() => user.GetThisMonthProfit(-1));
             }
 
             /// <summary>
             /// test getting month spends
             /// </summary>
             [Fact]
-            public void test_get_wallet_month_spends()
+            public void TestGetWalletMonthSpends()
             {
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(-23, "USD", category, "S", DateTime.Today, "S");
                 var transaction2 = new Transaction(-23, "USD", category, "S", DateTime.Today.AddDays(-40), "S");
                 var transaction3 = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                user.add_transaction(id, transaction);
-                user.add_transaction(id, transaction2);
-                user.add_transaction(id, transaction3);
+                user.AddTransaction(id, transaction);
+                user.AddTransaction(id, transaction2);
+                user.AddTransaction(id, transaction3);
 
-                Assert.Equal(user.get_this_month_spends(id), transaction.amount);
+                Assert.Equal(user.GetThisMonthSpends(id), transaction.Amount);
             }
 
             /// <summary>
             /// trying to get month spends of wrong wallet
             /// </summary>
             [Fact]
-            public void test_get_wallet_month_spends_wrong_wallet()
+            public void TestGetWalletMonthSpendsWrongWallet()
             {
                 var user = new User("user", "user", "mail");
                 Category category = new Category("s", "s", "s");
-                user.categories.Add(category);
-                var id = user.create_new_wallet("wallet", 0, "wallet", "USD");
+                user.Categories.Add(category);
+                var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today, "S");
-                user.add_transaction(id, transaction);
+                user.AddTransaction(id, transaction);
 
-                Assert.Throws<UserException>(() => user.get_this_month_spends(-1));
+                Assert.Throws<UserException>(() => user.GetThisMonthSpends(-1));
             }
         }
     }
