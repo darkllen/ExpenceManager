@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenceManager", "ExpenceManager\ExpenceManager.csproj", "{D0D8EE03-FA67-433D-B27E-1CE4606C46B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenceManagerModels", "ExpenceManager\ExpenceManagerModels.csproj", "{D0D8EE03-FA67-433D-B27E-1CE4606C46B7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3630CFC7-6CC9-4149-B24C-39D81597E1DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenceManager.Tests", "ExpenceManager.Tests\ExpenceManager.Tests.csproj", "{4021E9E4-3FC5-4498-92A5-8B94C74261F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenceManager.Tests", "ExpenceManager.Tests\ExpenceManager.Tests.csproj", "{4021E9E4-3FC5-4498-92A5-8B94C74261F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenceManagerWPF", "ExpenceManagerWPF\ExpenceManagerWPF.csproj", "{EB7FA7FF-1A0A-4BA2-8EFB-BB79CA1504FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{9EC6F48F-27F8-4745-98B0-08463263C3CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStorage", "DataStorage\DataStorage.csproj", "{E3B6476F-ABD1-4CFC-B50B-0D8A60E98267}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +29,18 @@ Global
 		{4021E9E4-3FC5-4498-92A5-8B94C74261F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4021E9E4-3FC5-4498-92A5-8B94C74261F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4021E9E4-3FC5-4498-92A5-8B94C74261F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB7FA7FF-1A0A-4BA2-8EFB-BB79CA1504FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB7FA7FF-1A0A-4BA2-8EFB-BB79CA1504FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB7FA7FF-1A0A-4BA2-8EFB-BB79CA1504FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB7FA7FF-1A0A-4BA2-8EFB-BB79CA1504FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EC6F48F-27F8-4745-98B0-08463263C3CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EC6F48F-27F8-4745-98B0-08463263C3CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EC6F48F-27F8-4745-98B0-08463263C3CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EC6F48F-27F8-4745-98B0-08463263C3CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3B6476F-ABD1-4CFC-B50B-0D8A60E98267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3B6476F-ABD1-4CFC-B50B-0D8A60E98267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3B6476F-ABD1-4CFC-B50B-0D8A60E98267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3B6476F-ABD1-4CFC-B50B-0D8A60E98267}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

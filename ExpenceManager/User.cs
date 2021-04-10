@@ -6,10 +6,10 @@ namespace ExpenceManager
     public class User
     {
         //user can't change name or surname
-        public string Name { get; }
-        public string Surname { get; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
         //user can change email
-        public string Email { get; }
+        public string Email { get; set; }
         //wallets are private, so User methods are needed to be used to work with wallets
         public List<Wallet> Wallets { get; }
         public List<Wallet> WalletsShared { get; }
