@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using ExpenceManager;
+using ExpenceManagerModels;
 using ExpenceManagerWPF.Navigation;
 using Prism.Commands;
 using Services;
@@ -11,7 +12,7 @@ namespace ExpenceManagerWPF.Authentication
 {
     public class SignUpViewModel : INotifyPropertyChanged, INavigatable<AuthNavigatableTypes>
     {
-        private User _regUser = new User("a", "a", "a");
+        private UserReg _regUser = new UserReg();
         private Action _gotoSignIn;
         
         public AuthNavigatableTypes Type
@@ -26,8 +27,39 @@ namespace ExpenceManagerWPF.Authentication
         {
             get
             {
-                return _regUser.Name;
+                return _regUser.Login;
             }
+            set
+            {
+                if (_regUser.Login != value)
+                {
+                    _regUser.Login = value;
+                    OnPropertyChanged();
+                    SignUpCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return _regUser.Password;
+            }
+            set
+            {
+                if (_regUser.Password != value)
+                {
+                    _regUser.Password = value;
+                    OnPropertyChanged();
+                    SignUpCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        public string Name
+        {
+            get { return _regUser.Name; }
             set
             {
                 if (_regUser.Name != value)
@@ -39,7 +71,7 @@ namespace ExpenceManagerWPF.Authentication
             }
         }
 
-        public string Password
+        public string Surname
         {
             get
             {
@@ -56,7 +88,7 @@ namespace ExpenceManagerWPF.Authentication
             }
         }
 
-        public string LastName
+        public string Email
         {
             get
             {
@@ -105,12 +137,16 @@ namespace ExpenceManagerWPF.Authentication
 
         private bool IsSignUpEnabled()
         {
-            return !String.IsNullOrWhiteSpace(Login) && !String.IsNullOrWhiteSpace(Password) && !String.IsNullOrWhiteSpace(LastName);
+            return !String.IsNullOrWhiteSpace(Login) &&
+                   !String.IsNullOrWhiteSpace(Password) &&
+                   !String.IsNullOrWhiteSpace(Name) &&
+                   !String.IsNullOrWhiteSpace(Surname) &&
+                   !String.IsNullOrWhiteSpace(Email);
         }
 
         public void ClearSensitiveData()
         {
-            _regUser = new User("a","a", "a");
+            _regUser = new UserReg();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

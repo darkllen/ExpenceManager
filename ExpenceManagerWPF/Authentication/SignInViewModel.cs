@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using ExpenceManager;
+using ExpenceManagerModels;
 using ExpenceManagerWPF.Navigation;
 using Prism.Commands;
 using Services;
@@ -11,7 +12,7 @@ namespace ExpenceManagerWPF.Authentication
 {
     public class SignInViewModel : INotifyPropertyChanged, INavigatable<AuthNavigatableTypes>
     {
-        private User _authUser = new User("a", "a", "a");
+        private UserAuth _authUser = new UserAuth();
         private Action _gotoSignUp;
         private Action _gotoWallets;
         private bool _isEnabled = true;
@@ -41,13 +42,13 @@ namespace ExpenceManagerWPF.Authentication
         {
             get
             {
-                return _authUser.Name;
+                return _authUser.Login;
             }
             set
             {
-                if (_authUser.Name != value)
+                if (_authUser.Login != value)
                 {
-                    _authUser.Name = value;
+                    _authUser.Login = value;
                     OnPropertyChanged();
                     SignInCommand.RaiseCanExecuteChanged();
                 }
@@ -57,13 +58,13 @@ namespace ExpenceManagerWPF.Authentication
         {
             get
             {
-                return _authUser.Surname;
+                return _authUser.Password;
             }
             set
             {
-                if (_authUser.Surname != value)
+                if (_authUser.Password != value)
                 {
-                    _authUser.Surname = value;
+                    _authUser.Password = value;
                     OnPropertyChanged();
                     SignInCommand.RaiseCanExecuteChanged();
                 }
