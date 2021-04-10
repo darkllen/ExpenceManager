@@ -2,13 +2,10 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Security.RightsManagement;
 using System.Windows;
-using ExpenceManager;
 using ExpenceManagerModels.Wallet;
 using ExpenceManagerWPF.Navigation;
 using Prism.Commands;
-using Prism.Mvvm;
 using Services;
 
 namespace ExpenceManagerWPF.Wallets

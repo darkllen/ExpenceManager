@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
-using ExpenceManager;
 using ExpenceManagerModels;
 using ExpenceManagerWPF.Navigation;
 using Prism.Commands;

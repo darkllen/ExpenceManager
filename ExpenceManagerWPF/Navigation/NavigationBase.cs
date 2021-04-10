@@ -8,7 +8,6 @@ namespace ExpenceManagerWPF.Navigation
     public abstract class NavigationBase<TObject> : BindableBase where TObject : Enum
     {
         private List<INavigatable<TObject>> _viewModels = new();
-        public static int a = 0;
 
         public INavigatable<TObject> CurrentViewModel
         {

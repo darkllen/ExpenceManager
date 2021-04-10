@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ExpenceManagerModels
+﻿namespace ExpenceManagerModels
 {
     public class UserAuth
     {
