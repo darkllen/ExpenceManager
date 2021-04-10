@@ -12,6 +12,11 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition MinHeight="50" MaxHeight="50"></RowDefinition>
+            <RowDefinition MinHeight="50" MaxHeight="50"></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="100"></ColumnDefinition>
             <ColumnDefinition Width="2"></ColumnDefinition>
@@ -20,6 +25,8 @@
 <!--Menu-->
         <ListView Grid.RowSpan="2" ItemsSource="{Binding Wallets}" 
                   DisplayMemberPath="DisplayName" SelectedItem="{Binding CurrentWallet}"></ListView>
+        <Button Grid.Row="1" Command="{Binding RemoveWalletCommand}" >Remove Selected</Button>
+        <Button Grid.Row="2"  Command="{Binding GoToCreation}" >Add new</Button>
 
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"></GridSplitter>
 <!--Content-->

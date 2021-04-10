@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataStorage;
 
 namespace ExpenceManager
 {
-    public class User
+    public class User : IStorable
     {
         //user can't change name or surname
+        public Guid Guid { get; }
         public string Name { get; set; }
         public string Surname { get; set; }
         //user can change email
@@ -16,11 +18,23 @@ namespace ExpenceManager
         //categories are public, so we can change them easy
         public List<Category> Categories { get; }
 
-        public User(string name, string surname, string email)
+        public User(string name, string surname, string email, Guid guid)
         {   
             Name = name;
             Surname = surname;
             Email = email;
+            Guid = guid;
+            Wallets = new List<Wallet>();
+            WalletsShared = new List<Wallet>();
+            Categories = new List<Category>();
+        }
+
+        public User(string name, string surname, string email)
+        {
+            Name = name;
+            Surname = surname;
+            Email = email;
+            Guid = new Guid();
             Wallets = new List<Wallet>();
             WalletsShared = new List<Wallet>();
             Categories = new List<Category>();
@@ -44,6 +58,7 @@ namespace ExpenceManager
             Wallet wallet = Wallet.CreateWalletForUser(this, name, startBalance, description, currency);
             return wallet;
         }
+
 
 
         /// <summary>

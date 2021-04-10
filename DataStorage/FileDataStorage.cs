@@ -26,6 +26,15 @@ namespace DataStorage
             }
         }
 
+        public async Task AddOrUpdateAsyncForObject(TObject obj, IStorable for_o)
+        {
+            var stringObj = JsonSerializer.Serialize(obj);
+            using (StreamWriter sw = new StreamWriter(Path.Combine(BaseFolder, obj.Guid.ToString("N")+'_'+ for_o.Guid.ToString("N")), false))
+            {
+                await sw.WriteAsync(stringObj);
+            }
+        }
+
         public async Task<TObject> GetAsync(Guid guid)
         {
             string stringObj = null;
@@ -60,5 +69,32 @@ namespace DataStorage
             return res;
         }
 
+
+        public async Task<List<TObject>> GetAllAsyncForObject(IStorable for_o)
+        {
+            var guid = for_o.Guid;
+            var res = new List<TObject>();
+            foreach (var file in Directory.EnumerateFiles(BaseFolder, "*_"+ guid.ToString("N")))
+            {
+                string stringObj = null;
+
+                using (StreamReader sw = new StreamReader(file))
+                {
+                    stringObj = await sw.ReadToEndAsync();
+                }
+
+                res.Add(JsonSerializer.Deserialize<TObject>(stringObj));
+            }
+
+            return res;
+        }
+
+        public async Task RemoveObj(IStorable obj)
+        {
+            foreach (var file in Directory.GetFiles(BaseFolder, obj.Guid.ToString("N")+"_*"))
+            {
+                File.Delete(file);
+            }
+        }
     }
 }

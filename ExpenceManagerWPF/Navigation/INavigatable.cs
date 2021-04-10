@@ -7,5 +7,6 @@ namespace ExpenceManagerWPF.Navigation
         public TObject Type { get; }
 
         public void ClearSensitiveData();
+        void Update();
     }
 }

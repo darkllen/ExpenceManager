@@ -149,6 +149,10 @@ namespace ExpenceManagerWPF.Authentication
             _regUser = new UserReg();
         }
 
+        public void Update()
+        {
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -19,7 +19,7 @@ namespace ExpenceManagerWPF
             }
             else
             {
-                return new WalletsViewModel();
+                return new WalletBaseViewModel();
             }
         }
     }

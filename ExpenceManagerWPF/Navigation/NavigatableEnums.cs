@@ -11,4 +11,10 @@
         Auth,
         Wallets
     }
+
+    public enum WalletsNavigatableTypes
+    {
+        Wallet,
+        Creation
+    }
 }

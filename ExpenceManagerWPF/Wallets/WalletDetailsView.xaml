@@ -9,6 +9,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" >
             <TextBlock Margin="10, 10, 10, 0">Name</TextBlock>
@@ -16,9 +19,22 @@
                      Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="1" >
-            <TextBlock Margin="10, 10, 10, 0">Balance</TextBlock>
+            <TextBlock Margin="10, 10, 10, 0">Description</TextBlock>
             <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch" 
-                     Text="{Binding Balance, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                     Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         </StackPanel>
+        <StackPanel Grid.Row="2" >
+            <TextBlock Margin="10, 10, 10, 0">Current balance</TextBlock>
+            <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch" 
+                     IsEnabled="False"
+                     Text="{Binding CurrBalance, Mode=OneWay}"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" >
+            <TextBlock Margin="10, 10, 10, 0">Currency</TextBlock>
+            <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch" 
+                     IsEnabled="False"
+                     Text="{Binding Currency, Mode=OneWay}"></TextBox>
+        </StackPanel>
+        <Button Grid.Row="4" Command="{Binding UpdateWalletCommand}">Save changes</Button>
     </Grid>
 </UserControl>

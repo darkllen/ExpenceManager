@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using ExpenceManagerWPF.Navigation;
 
 namespace ExpenceManagerWPF.Authentication
@@ -6,6 +7,7 @@ namespace ExpenceManagerWPF.Authentication
     public class AuthViewModel : NavigationBase<AuthNavigatableTypes>, INavigatable<MainNavigatableTypes>
     {
         private Action _signInSuccess;
+        
         
         public AuthViewModel(Action signInSuccess)
         {
@@ -36,6 +38,11 @@ namespace ExpenceManagerWPF.Authentication
         public void ClearSensitiveData()
         {
             CurrentViewModel.ClearSensitiveData();
+        }
+
+        public void Update()
+        {
+            CurrentViewModel.Update();
         }
     }
 }

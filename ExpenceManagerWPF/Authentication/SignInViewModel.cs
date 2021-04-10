@@ -91,11 +91,15 @@ namespace ExpenceManagerWPF.Authentication
             else
             {
                 var authService = new AuthenticationService();
+                var walletService = new WalletService();
                 User user = null;
                 try
                 {
                     IsEnabled = false;
-                    user = await authService.AuthenticateAsync(_authUser);
+                    await authService.AuthenticateAsync(_authUser);
+                    AuthenticationService.CurrentUser =
+                        await walletService.LoadUserWallets(AuthenticationService.CurrentUser);
+
                 }
                 catch (Exception ex)
                 {
@@ -106,7 +110,7 @@ namespace ExpenceManagerWPF.Authentication
                 {
                     IsEnabled = true;
                 }
-                MessageBox.Show($"Sign In was successful for user {user.Name} {user.Surname}");
+                MessageBox.Show($"Sign In was successful for user {AuthenticationService.CurrentUser.Name} {AuthenticationService.CurrentUser.Surname}");
                 _gotoWallets.Invoke();
             }
         }
@@ -119,6 +123,10 @@ namespace ExpenceManagerWPF.Authentication
         public void ClearSensitiveData()
         {
             Password = "";
+        }
+
+        public void Update()
+        {
         }
 
 

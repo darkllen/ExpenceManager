@@ -11,7 +11,8 @@ namespace Services
 {
     public class AuthenticationService
     {
-        private FileDataStorage<UserDB> _storage = new FileDataStorage<UserDB>();
+        private readonly FileDataStorage<UserDB> _storage = new FileDataStorage<UserDB>();
+        public static User CurrentUser;
 
         public async Task<User> AuthenticateAsync(UserAuth authUser)
         {
@@ -21,7 +22,9 @@ namespace Services
             var dbUser = users.FirstOrDefault(user => user.Login == authUser.Login && user.Password == authUser.Password);
             if (dbUser == null)
                 throw new UserException("Wrong Login or Password");
-            return new User( dbUser.Name, dbUser.Surname, dbUser.Email);
+
+            CurrentUser = new User(dbUser.Name, dbUser.Surname, dbUser.Email, dbUser.Guid);
+            return CurrentUser;
         }
 
         public async Task<bool> RegisterUserAsync(UserReg regUser)
