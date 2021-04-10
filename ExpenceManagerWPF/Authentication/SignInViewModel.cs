@@ -38,6 +38,8 @@ namespace ExpenceManagerWPF.Authentication
                 return AuthNavigatableTypes.SignIn;
             }
         }
+
+        public string LoginErr { get; set; }
         public string Login
         {
             get
@@ -54,6 +56,8 @@ namespace ExpenceManagerWPF.Authentication
                 }
             }
         }
+
+        public string PasswordErr { get; set; }
         public string Password
         {
             get
@@ -117,7 +121,32 @@ namespace ExpenceManagerWPF.Authentication
 
         private bool IsSignInEnabled()
         {
-            return !String.IsNullOrWhiteSpace(Login) && !String.IsNullOrWhiteSpace(Password);
+            bool valid = true;
+            if (String.IsNullOrWhiteSpace(Login))
+            {
+                LoginErr = "Login can't be empty";
+                OnPropertyChanged(nameof(LoginErr));
+                valid = false;
+            }
+            else
+            {
+                LoginErr = "";
+                OnPropertyChanged(nameof(LoginErr));
+            }
+
+            if (String.IsNullOrWhiteSpace(Password))
+            {
+                PasswordErr = "Password can't be empty";
+                OnPropertyChanged(nameof(PasswordErr));
+                valid = false;
+            }
+            else
+            {
+                PasswordErr = "";
+                OnPropertyChanged(nameof(PasswordErr));
+            }
+
+            return valid;
         }
 
         public void ClearSensitiveData()

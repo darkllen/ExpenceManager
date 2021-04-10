@@ -12,6 +12,7 @@ namespace ExpenceManagerWPF.Wallets
     {
         private Wallet _wallet;
 
+        public string NameErr { get; set; }
         public string Name
         {
             get
@@ -22,6 +23,7 @@ namespace ExpenceManagerWPF.Wallets
             {
                 _wallet.Name = value;
                 RaisePropertyChanged(nameof(DisplayName));
+                UpdateWalletCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -36,6 +38,8 @@ namespace ExpenceManagerWPF.Wallets
 
         public DelegateCommand UpdateWalletCommand { get; }
 
+
+        public string DescriptionErr { get; set; }
         public string Description
         {
             get
@@ -46,6 +50,7 @@ namespace ExpenceManagerWPF.Wallets
             {
                 _wallet.Description = value;
                 RaisePropertyChanged(nameof(DisplayName));
+                UpdateWalletCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -72,14 +77,50 @@ namespace ExpenceManagerWPF.Wallets
         {
             get
             {
-                return $"{_wallet.Name} (${_wallet.CurrBalance})";
+                return $"{_wallet.Name} ({_wallet.CurrBalance} {_wallet.Currency})";
             }
         }
 
         public WalletDetailsViewModel(Wallet wallet)
         {
             _wallet = wallet;
-            UpdateWalletCommand = new DelegateCommand(updateWallet);
+            UpdateWalletCommand = new DelegateCommand(updateWallet, IsValid);
+        }
+
+        private bool IsValid()
+        {
+            bool valid = true;
+            if (String.IsNullOrWhiteSpace(Name))
+            {
+                NameErr = "Name can't be empty";
+                RaisePropertyChanged(nameof(NameErr));
+                valid = false;
+            }
+            else if (Name.Length > 20)
+            {
+                NameErr = "Name can't be more than 20 symbols";
+                RaisePropertyChanged(nameof(NameErr));
+                valid = false;
+            }
+            else
+            {
+                NameErr = "";
+                RaisePropertyChanged(nameof(NameErr));
+            }
+
+            if (String.IsNullOrWhiteSpace(Description))
+            {
+                DescriptionErr = "Description can't be empty";
+                RaisePropertyChanged(nameof(DescriptionErr));
+                valid = false;
+            }
+            else
+            {
+                DescriptionErr = "";
+                RaisePropertyChanged(nameof(DescriptionErr));
+            }
+
+            return valid;
         }
 
 

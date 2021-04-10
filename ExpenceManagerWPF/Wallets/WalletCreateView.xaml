@@ -25,20 +25,24 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.ColumnSpan="2">
-            <TextBlock Margin="10, 10, 10, 0">Name</TextBlock>
-            <TextBox Name="TbLogin" Width="300" Margin="10" HorizontalAlignment="Stretch" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Name</TextBlock>
+            <TextBox Name="TbLogin" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding NameErr}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.ColumnSpan="2" Grid.Row="1">
-            <TextBlock Margin="10, 10, 10, 0">Description</TextBlock>
-            <TextBox Name="TbDescription" Width="300" Margin="10" HorizontalAlignment="Stretch" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Description</TextBlock>
+            <TextBox Name="TbDescription" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding DescriptionErr}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.ColumnSpan="2" Grid.Row="2">
-            <TextBlock Margin="10, 10, 10, 0">Start Balance</TextBlock>
-            <TextBox Name="TbStartBalance" Width="300" Margin="10" HorizontalAlignment="Stretch" Text="{Binding StartBalance, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Start Balance</TextBlock>
+            <TextBox Name="TbStartBalance" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" Text="{Binding StartBalance, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding BalanceErr}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.ColumnSpan="2" Grid.Row="3">
-            <TextBlock Margin="10, 10, 10, 0">Currency</TextBlock>
-            <TextBox Name="TbCurrency" Width="300" Margin="10" HorizontalAlignment="Stretch" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Currency</TextBlock>
+            <TextBox Name="TbCurrency" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" Text="{Binding Currency, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding CurrencyErr}"></TextBlock>
         </StackPanel>
 
         <Button Name="BSignIn" Grid.Column="0" Margin="10,10,10,10" Command="{Binding AddWalletCommand}" Grid.Row="4">Add</Button>

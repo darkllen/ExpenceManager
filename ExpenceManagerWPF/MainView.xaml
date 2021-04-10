@@ -6,7 +6,7 @@
              xmlns:authentication="clr-namespace:ExpenceManagerWPF.Authentication"
              xmlns:wallets="clr-namespace:ExpenceManagerWPF.Wallets"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="750" d:DesignWidth="800">
     <UserControl.Resources>
         <DataTemplate DataType="{ x:Type authentication:AuthViewModel}">
             <authentication:AuthView></authentication:AuthView>

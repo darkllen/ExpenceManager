@@ -26,9 +26,11 @@ namespace ExpenceManagerWPF.Wallets
         {
             _gotoWallets = gotoWallets;
             GoBackCommand = new DelegateCommand(_gotoWallets);
-            AddWalletCommand = new DelegateCommand(CreateWallet);
+            AddWalletCommand = new DelegateCommand(CreateWallet, IsValid);
         }
 
+
+        public string NameErr { get; set; }
         public string Name
         {
             get
@@ -39,9 +41,11 @@ namespace ExpenceManagerWPF.Wallets
             {
                 _wallet.Name = value;
                 OnPropertyChanged();
+                AddWalletCommand.RaiseCanExecuteChanged();
             }
         }
 
+        public string BalanceErr { get; set; }
         public decimal StartBalance
         {
             get
@@ -52,9 +56,11 @@ namespace ExpenceManagerWPF.Wallets
             {
                 _wallet.CurrBalance = value;
                 OnPropertyChanged();
+                AddWalletCommand.RaiseCanExecuteChanged();
             }
         }
 
+        public string DescriptionErr { get; set; }
         public string Description
         {
             get
@@ -65,9 +71,11 @@ namespace ExpenceManagerWPF.Wallets
             {
                 _wallet.Description = value;
                 OnPropertyChanged();
+                AddWalletCommand.RaiseCanExecuteChanged();
             }
         }
 
+        public string CurrencyErr { get; set; }
         public string Currency
         {
             get
@@ -78,9 +86,74 @@ namespace ExpenceManagerWPF.Wallets
             {
                 _wallet.Currency = value;
                 OnPropertyChanged();
+                AddWalletCommand.RaiseCanExecuteChanged();
             }
         }
 
+
+        private bool IsValid()
+        {
+            bool valid = true;
+            if (String.IsNullOrWhiteSpace(Name))
+            {
+                NameErr = "Name can't be empty";
+                OnPropertyChanged(nameof(NameErr));
+                valid = false;
+            } else if (Name.Length > 20)
+            {
+                NameErr = "Name can't be more than 20 symbols";
+                OnPropertyChanged(nameof(NameErr));
+                valid = false;
+            }
+            else
+            {
+                NameErr = "";
+                OnPropertyChanged(nameof(NameErr));
+            }
+
+            if (String.IsNullOrWhiteSpace(Description))
+            {
+                DescriptionErr = "Description can't be empty";
+                OnPropertyChanged(nameof(DescriptionErr));
+                valid = false;
+            }
+            else
+            {
+                DescriptionErr = "";
+                OnPropertyChanged(nameof(DescriptionErr));
+            }
+
+            if (String.IsNullOrWhiteSpace(Currency))
+            {
+                CurrencyErr = "Currency can't be empty";
+                OnPropertyChanged(nameof(CurrencyErr));
+                valid = false;
+            }
+            else if (Currency.Length > 4)
+            {
+                CurrencyErr = "Currency can't be more than 4 symbols";
+                OnPropertyChanged(nameof(CurrencyErr));
+                valid = false;
+            } else
+            {
+                CurrencyErr = "";
+                OnPropertyChanged(nameof(CurrencyErr));
+            }
+
+            if (StartBalance < 0)
+            {
+                BalanceErr = "Start balance can't be less than 0";
+                OnPropertyChanged(nameof(BalanceErr));
+                valid = false;
+            }
+            else
+            {
+                BalanceErr = "";
+                OnPropertyChanged(nameof(BalanceErr));
+            }
+
+            return valid;
+        }
 
         private async void CreateWallet()
         {

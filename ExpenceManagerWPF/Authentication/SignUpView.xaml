@@ -20,28 +20,33 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="2">
-            <TextBlock Margin="10, 10, 10, 0">Login</TextBlock>
-            <TextBox Width="300" Margin="10" HorizontalAlignment="Stretch" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Login</TextBlock>
+            <TextBox Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding LoginErr}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
-            <TextBlock Margin="10, 10, 10, 0">Password</TextBlock>
-            <PasswordBox Name="TbPassword" Width="300" Margin="10" HorizontalAlignment="Stretch" PasswordChanged="TbPassword_OnPasswordChanged" ></PasswordBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 20, 10, 0">Password</TextBlock>
+            <PasswordBox Name="TbPassword" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" PasswordChanged="TbPassword_OnPasswordChanged" ></PasswordBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding PasswordErr}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0">
-            <TextBlock Margin="10, 10, 10, 0">Name</TextBlock>
-            <TextBox Width="300" Margin="10" HorizontalAlignment="Stretch" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center"  Margin="10, 20, 10, 0">Name</TextBlock>
+            <TextBox Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding NameErr}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0">
-            <TextBlock Margin="10, 10, 10, 0">Surname</TextBlock>
-            <TextBox Width="300" Margin="10" HorizontalAlignment="Stretch" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 20, 10, 0">Surname</TextBlock>
+            <TextBox Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding SurnameErr}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0">
-            <TextBlock Margin="10, 10, 10, 0">Email</TextBlock>
-            <TextBox Width="300" Margin="10" HorizontalAlignment="Stretch" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 20, 10, 0">Email</TextBlock>
+            <TextBox Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding EmailErr}"></TextBlock>
         </StackPanel>
 
-        <Button Name="BSignIn" Grid.Column="0" Margin="10,10,10,10" Command="{Binding SignUpCommand}" Grid.Row="5">Sign Up</Button>
-        <Button Name="BClose" Grid.Row="5" Grid.Column="1" Margin="10" Command="{Binding CloseCommand}">Close</Button>
+        <Button Name="BSignIn" Grid.Column="0" Margin="10,20,10,10" Command="{Binding SignUpCommand}" Grid.Row="5">Sign Up</Button>
+        <Button Name="BClose" Grid.Row="5" Grid.Column="1" Margin="10,20,10,10" Command="{Binding CloseCommand}">Close</Button>
         <Button Grid.Column="0" Margin="10,10,10,10" Command="{Binding SignInCommand}" Grid.Row="6" Grid.ColumnSpan="2">Go to Sign In</Button>
     </Grid>
 </UserControl>

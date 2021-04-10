@@ -14,23 +14,25 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" >
-            <TextBlock Margin="10, 10, 10, 0">Name</TextBlock>
-            <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch" 
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Name</TextBlock>
+            <TextBox MinWidth="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" 
                      Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding NameErr}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="1" >
-            <TextBlock Margin="10, 10, 10, 0">Description</TextBlock>
-            <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch" 
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Description</TextBlock>
+            <TextBox MinWidth="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" 
                      Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding DescriptionErr}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="2" >
-            <TextBlock Margin="10, 10, 10, 0">Current balance</TextBlock>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Current balance</TextBlock>
             <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch" 
                      IsEnabled="False"
                      Text="{Binding CurrBalance, Mode=OneWay}"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="3" >
-            <TextBlock Margin="10, 10, 10, 0">Currency</TextBlock>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Currency</TextBlock>
             <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch" 
                      IsEnabled="False"
                      Text="{Binding Currency, Mode=OneWay}"></TextBox>
