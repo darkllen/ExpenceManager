@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using ExpenceManager;
 using ExpenceManagerModels.Wallet;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -155,7 +154,7 @@ namespace ExpenceManagerWPF.Wallets
             var service = new WalletService();
             try
             {
-                WalletDB wallet = new WalletDB(_wallet.Guid, _wallet.Name, _wallet.CurrBalance, _wallet.Description,
+                WalletDb wallet = new WalletDb(_wallet.Guid, _wallet.Name, _wallet.CurrBalance, _wallet.Description,
                     _wallet.Currency);
                 await service.SaveUpdateWallet(AuthenticationService.CurrentUser, wallet);
             }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ExpenceManager
+namespace ExpenceManagerModels.Users
 {
     /// <summary>
     /// class for User exeptions

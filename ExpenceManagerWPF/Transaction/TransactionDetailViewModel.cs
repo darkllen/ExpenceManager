@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using ExpenceManager;
 using ExpenceManagerModels;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -14,12 +13,12 @@ namespace ExpenceManagerWPF.Transaction
 {
     public class TransactionDetailViewModel : BindableBase
     {
-        private ExpenceManager.Transaction _transaction;
+        private ExpenceManagerModels.Transaction _transaction;
 
         private Action _update;
 
 
-        public ExpenceManager.Transaction Transaction
+        public ExpenceManagerModels.Transaction Transaction
         {
             get
             {
@@ -109,7 +108,7 @@ namespace ExpenceManagerWPF.Transaction
             }
         }
 
-        public TransactionDetailViewModel(ExpenceManager.Transaction transaction, Action update)
+        public TransactionDetailViewModel(ExpenceManagerModels.Transaction transaction, Action update)
         {
             _transaction = transaction;
             _update = update;

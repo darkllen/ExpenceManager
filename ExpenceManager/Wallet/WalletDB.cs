@@ -4,9 +4,9 @@ using DataStorage;
 
 namespace ExpenceManagerModels.Wallet
 {
-    public class WalletDB : IStorable
+    public class WalletDb : IStorable
     {
-        public WalletDB(string name, decimal startBalance, string description, string currency)
+        public WalletDb(string name, decimal startBalance, string description, string currency)
         {
             Guid = Guid.NewGuid();
             Name = name;
@@ -16,7 +16,7 @@ namespace ExpenceManagerModels.Wallet
         }
 
         [JsonConstructor]
-        public WalletDB(Guid guid, string name, decimal currBalance, string description, string currency)
+        public WalletDb(Guid guid, string name, decimal currBalance, string description, string currency)
         {
             Guid = guid;
             Name = name;
@@ -25,7 +25,7 @@ namespace ExpenceManagerModels.Wallet
             Currency = currency;
         }
 
-        public WalletDB()
+        public WalletDb()
         {
             Guid = Guid.NewGuid();
         }

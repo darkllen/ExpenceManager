@@ -1,5 +1,7 @@
 using System;
 using ExpenceManagerModels;
+using ExpenceManagerModels.Users;
+using ExpenceManagerModels.Wallet;
 using Xunit;
 
 
@@ -110,7 +112,7 @@ namespace ExpenceManager.Tests
                 var user = new User("user", "user", "mail");
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
-                Assert.Throws<UserException>(() => user.SwitchCategoryPermisiion(wallet, new Category("s", "s")));
+                Assert.Throws<UserException>(() => user.SwitchCategoryPermission(wallet, new Category("s", "s")));
             }
 
             /// <summary>
@@ -124,7 +126,7 @@ namespace ExpenceManager.Tests
 
                 var user = new User("user", "user", "mail");
 
-                Assert.Throws<UserException>(() => user.SwitchCategoryPermisiion(wrongWallet, new Category("s", "s")));
+                Assert.Throws<UserException>(() => user.SwitchCategoryPermission(wrongWallet, new Category("s", "s")));
             }
 
             /// <summary>
@@ -138,12 +140,12 @@ namespace ExpenceManager.Tests
                 Category category = new Category("s", "s");
                 user.Categories.Add(category);
 
-                user.SwitchCategoryPermisiion(wallet, category);
+                user.SwitchCategoryPermission(wallet, category);
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today);
                 Assert.Throws<WalletException>(() => user.AddTransaction(wallet, transaction));
 
-                user.SwitchCategoryPermisiion(wallet, category);
+                user.SwitchCategoryPermission(wallet, category);
                 user.AddTransaction(wallet, new Transaction(23, "USD", category, "S", DateTime.Today));
             }
         }
@@ -352,7 +354,7 @@ namespace ExpenceManager.Tests
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today);
                 user.AddTransaction(wallet, transaction);
 
-                var balance = user.GetWalletBallance(wallet);
+                var balance = user.GetWalletBalance(wallet);
                 Assert.Equal(transaction.Amount, balance);
             }
 
@@ -371,10 +373,10 @@ namespace ExpenceManager.Tests
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today);
                 user.AddTransaction(wallet, transaction);
 
-                var balance = user.GetWalletBallance(wallet);
+                var balance = user.GetWalletBalance(wallet);
                 Assert.Equal(transaction.Amount, balance);
                 user.RemoveTransaction(wallet, transaction);
-                balance = user.GetWalletBallance(wallet);
+                balance = user.GetWalletBalance(wallet);
                 Assert.Equal(start, balance);
             }
 

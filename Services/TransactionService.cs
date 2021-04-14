@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataStorage;
-using ExpenceManager;
+using ExpenceManagerModels;
 using ExpenceManagerModels.Wallet;
 
 namespace Services

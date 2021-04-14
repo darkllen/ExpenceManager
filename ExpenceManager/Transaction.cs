@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 using DataStorage;
-using ExpenceManagerModels;
 
-namespace ExpenceManager
+namespace ExpenceManagerModels
 {
     public class Transaction : IStorable
     {
@@ -49,10 +48,10 @@ namespace ExpenceManager
         public decimal ConvertTo(string currency)
         {
             if (Currency == currency) return Amount;
-            if (!Wallet.PossibleCurrency.ContainsKey(currency)) throw new ArgumentException("wrong currency");
-            if (Currency == "UAH") return Amount / Wallet.PossibleCurrency[currency];
-            if (currency == "UAH") return Amount * Wallet.PossibleCurrency[Currency];
-            return (Amount * Wallet.PossibleCurrency[Currency]) / Wallet.PossibleCurrency[currency];
+            if (!Wallet.Wallet.PossibleCurrency.ContainsKey(currency)) throw new ArgumentException("wrong currency");
+            if (Currency == "UAH") return Amount / Wallet.Wallet.PossibleCurrency[currency];
+            if (currency == "UAH") return Amount * Wallet.Wallet.PossibleCurrency[Currency];
+            return (Amount * Wallet.Wallet.PossibleCurrency[Currency]) / Wallet.Wallet.PossibleCurrency[currency];
         }
 
         public Transaction(string currency)

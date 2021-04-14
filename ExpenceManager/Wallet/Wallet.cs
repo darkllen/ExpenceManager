@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataStorage;
-using ExpenceManagerModels;
+using ExpenceManagerModels.Users;
 
-namespace ExpenceManager
+namespace ExpenceManagerModels.Wallet
 {
 
     public class Wallet : IStorable
@@ -101,6 +101,7 @@ namespace ExpenceManager
         /// <summary>
         /// get 10 first transactions starts from certain position
         /// </summary>
+        /// <param name="user"></param>
         /// <param name="startPlace">position to start from</param>
         /// <returns>List with 10 or less transactions</returns>
         public List<Transaction> Get10Transactions(User user, int startPlace)
@@ -123,6 +124,7 @@ namespace ExpenceManager
         /// <summary>
         /// add transaction to wallet if possible
         /// </summary>
+        /// <param name="user"></param>
         /// <param name="transaction">transaction to add</param>
         public void AddTransaction(User user, Transaction transaction)
         {
@@ -137,6 +139,7 @@ namespace ExpenceManager
         /// <summary>
         /// remove transaction from wallet
         /// </summary>
+        /// <param name="user"></param>
         /// <param name="transaction">transaction to remove</param>
         public void RemoveTransaction(User user, Transaction transaction)
         {

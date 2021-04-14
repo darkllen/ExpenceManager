@@ -1,4 +1,4 @@
-﻿namespace ExpenceManagerModels
+﻿namespace ExpenceManagerModels.Users
 {
     public class UserReg
     {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataStorage;
-using ExpenceManager;
 using ExpenceManagerModels;
 using ExpenceManagerModels.Users;
 
@@ -11,7 +10,7 @@ namespace Services
 {
     public class AuthenticationService
     {
-        private readonly FileDataStorage<UserDB> _storage = new FileDataStorage<UserDB>();
+        private readonly FileDataStorage<UserDb> _storage = new FileDataStorage<UserDb>();
         public static User CurrentUser;
 
         public async Task<User> AuthenticateAsync(UserAuth authUser)
@@ -19,7 +18,7 @@ namespace Services
             if (String.IsNullOrWhiteSpace(authUser.Login) || String.IsNullOrWhiteSpace(authUser.Password))
                 throw new ArgumentException("Login or Password is Empty");
             var users = await _storage.GetAllAsync();
-            UserDB dbUser = null;
+            UserDb dbUser = null;
             try
             {
                 dbUser = users.FirstOrDefault(user =>
@@ -51,7 +50,7 @@ namespace Services
                 String.IsNullOrWhiteSpace(regUser.Password) || 
                 String.IsNullOrWhiteSpace(regUser.Email))
                 throw new ArgumentException("Login, Password, Name, Surname or Email is Empty");
-            dbUser = new UserDB(regUser.Login, Encryption.Encrypt(regUser.Password, regUser.Password), regUser.Name, regUser.Surname, regUser.Email);
+            dbUser = new UserDb(regUser.Login, Encryption.Encrypt(regUser.Password, regUser.Password), regUser.Name, regUser.Surname, regUser.Email);
             await _storage.AddOrUpdateAsync(dbUser);
             return true;
         }

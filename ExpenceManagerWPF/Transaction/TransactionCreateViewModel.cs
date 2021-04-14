@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using ExpenceManager;
 using ExpenceManagerModels;
 using ExpenceManagerModels.Wallet;
 using ExpenceManagerWPF.Navigation;
@@ -17,7 +16,7 @@ namespace ExpenceManagerWPF.Transaction
 {
     class TransactionCreateViewModel : INotifyPropertyChanged, INavigatable<WalletsNavigatableTypes>
     {
-        private ExpenceManager.Transaction _transaction = new(WalletService.CurrentWallet.Currency);
+        private ExpenceManagerModels.Transaction _transaction = new(WalletService.CurrentWallet.Currency);
         private Action _gotoWallets;
 
 

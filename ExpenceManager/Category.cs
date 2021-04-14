@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ExpenceManager
+namespace ExpenceManagerModels
 {
 
     public class Category

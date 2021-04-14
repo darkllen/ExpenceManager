@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using ExpenceManagerModels;
+using ExpenceManagerModels.Users;
 using ExpenceManagerWPF.Navigation;
 using Prism.Commands;
 using Services;

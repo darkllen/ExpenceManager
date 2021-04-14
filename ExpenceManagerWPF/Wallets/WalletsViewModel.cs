@@ -128,7 +128,7 @@ namespace ExpenceManagerWPF.Wallets
         {
            
             WalletService service = new WalletService();
-            WalletDB wallet = new WalletDB(_currentWallet.Guid, _currentWallet.Name, _currentWallet.Wallet.CurrBalance, _currentWallet.Description,
+            WalletDb wallet = new WalletDb(_currentWallet.Guid, _currentWallet.Name, _currentWallet.Wallet.CurrBalance, _currentWallet.Description,
                     _currentWallet.Currency);
             await service.RemoveWallet(wallet);
 

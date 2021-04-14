@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using ExpenceManager;
 using ExpenceManagerModels.Wallet;
 using Services;
 using ExpenceManagerWPF.Navigation;
@@ -15,7 +14,7 @@ namespace ExpenceManagerWPF.Wallets
     
     class WalletCreateViewModel :  INotifyPropertyChanged, INavigatable<WalletsNavigatableTypes>
     {
-        private WalletDB _wallet = new WalletDB();
+        private WalletDb _wallet = new WalletDb();
         private Action _gotoWallets;
 
         public DelegateCommand GoBackCommand { get; }
@@ -179,7 +178,7 @@ namespace ExpenceManagerWPF.Wallets
         }
         public void ClearSensitiveData()
         {
-            _wallet = new WalletDB();
+            _wallet = new WalletDb();
         }
 
         public void Update()

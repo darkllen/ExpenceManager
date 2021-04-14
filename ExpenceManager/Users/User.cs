@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataStorage;
-using ExpenceManagerModels;
 
-namespace ExpenceManager
+namespace ExpenceManagerModels.Users
 {
     public class User : IStorable
     {
@@ -14,8 +13,8 @@ namespace ExpenceManager
         //user can change email
         public string Email { get; set; }
         //wallets are private, so User methods are needed to be used to work with wallets
-        public List<Wallet> Wallets { get; }
-        public List<Wallet> WalletsShared { get; }
+        public List<Wallet.Wallet> Wallets { get; }
+        public List<Wallet.Wallet> WalletsShared { get; }
         //categories are public, so we can change them easy
         public List<Category> Categories { get; }
 
@@ -25,8 +24,8 @@ namespace ExpenceManager
             Surname = surname;
             Email = email;
             Guid = guid;
-            Wallets = new List<Wallet>();
-            WalletsShared = new List<Wallet>();
+            Wallets = new List<Wallet.Wallet>();
+            WalletsShared = new List<Wallet.Wallet>();
 
             if (!categories.Contains(Category.DefaultCategory))categories.Add(Category.DefaultCategory);
             Categories = categories;
@@ -38,8 +37,8 @@ namespace ExpenceManager
             Surname = surname;
             Email = email;
             Guid = new Guid();
-            Wallets = new List<Wallet>();
-            WalletsShared = new List<Wallet>();
+            Wallets = new List<Wallet.Wallet>();
+            WalletsShared = new List<Wallet.Wallet>();
             Categories = new List<Category>() {Category.DefaultCategory};
         }
 
@@ -48,28 +47,27 @@ namespace ExpenceManager
         /// This is the only way to create wallet.
         /// </summary>
         /// <param name="name">wallet name</param>
-        /// <param name="startBalance">wallet start ballance</param>
+        /// <param name="startBalance">wallet start balance</param>
         /// <param name="description">wallet description</param>
         /// <param name="currency">wallet currency</param>
         /// <returns>id of created wallet</returns>
-        public Wallet CreateNewWallet(string name,
+        public Wallet.Wallet CreateNewWallet(string name,
                                    decimal startBalance,
                                    string description,
                                    string currency)
         {
-            //create wallet and asign it to user
-            Wallet wallet = Wallet.CreateWalletForUser(this, name, startBalance, description, currency);
+            //create wallet and assign it to user
+            Wallet.Wallet wallet = Wallet.Wallet.CreateWalletForUser(this, name, startBalance, description, currency);
             return wallet;
         }
-
 
 
         /// <summary>
         /// share wallet with another user
         /// </summary>
-        /// <param name="walletId">wallet id</param>
+        /// <param name="toShare"></param>
         /// <param name="user">user to share wallet with</param>
-        public void ShareWalletWithUser(Wallet toShare, User user)
+        public void ShareWalletWithUser(Wallet.Wallet toShare, User user)
         {
             if (!Wallets.Contains(toShare)) throw new UserException("can not share wallet if you are not owner");
             if (user == this) throw new UserException("can not share wallet with owner");
@@ -80,11 +78,11 @@ namespace ExpenceManager
         }
 
         /// <summary>
-        /// change categories accessebility for wallet.
+        /// change categories accessibility for wallet.
         /// </summary>
-        /// <param name="walletId">wallet id</param>
+        /// <param name="wallet"></param>
         /// <param name="category">category to change</param>
-        public void SwitchCategoryPermisiion(Wallet wallet, Category category)
+        public void SwitchCategoryPermission(Wallet.Wallet wallet, Category category)
 
         {
             if (!Wallets.Contains(wallet)) throw new UserException("can not switch categories if you are not owner");
@@ -98,9 +96,9 @@ namespace ExpenceManager
         /// <summary>
         /// add transaction to wallet
         /// </summary>
-        /// <param name="walletId">wallet id</param>
+        /// <param name="wallet"></param>
         /// <param name="transaction">transaction to add</param>
-        public void AddTransaction(Wallet wallet, Transaction transaction)
+        public void AddTransaction(Wallet.Wallet wallet, Transaction transaction)
             
         {
             wallet.AddTransaction(this, transaction);
@@ -109,9 +107,9 @@ namespace ExpenceManager
         /// <summary>
         /// remove transaction from wallet
         /// </summary>
-        /// <param name="walletId">wallet id</param>
+        /// <param name="wallet"></param>
         /// <param name="transaction">transaction to remove</param>
-        public void RemoveTransaction(Wallet wallet, Transaction transaction)
+        public void RemoveTransaction(Wallet.Wallet wallet, Transaction transaction)
         {
             wallet.RemoveTransaction(this,  transaction);
         }
@@ -119,10 +117,10 @@ namespace ExpenceManager
         /// <summary>
         /// get 10 first transactions starts from certain position
         /// </summary>
-        /// <param name="walletId">wallet id</param>
+        /// <param name="wallet"></param>
         /// <param name="start">position to start from</param>
         /// <returns>List with 10 or less transactions</returns>
-        public List<Transaction> Get10Transactions(Wallet wallet, int start)
+        public List<Transaction> Get10Transactions(Wallet.Wallet wallet, int start)
         {
             return wallet.Get10Transactions(this, start);
         }
@@ -130,9 +128,8 @@ namespace ExpenceManager
         /// <summary>
         /// show wallet current balance
         /// </summary>
-        /// <param name="walletId">wallet id</param>
-        /// <returns>curent balance of wallet</returns>
-        public decimal GetWalletBallance(Wallet wallet)
+        /// <returns>current balance of wallet</returns>
+        public decimal GetWalletBalance(Wallet.Wallet wallet)
         {
             return wallet.CurrBalance;
         }
@@ -140,9 +137,8 @@ namespace ExpenceManager
         /// <summary>
         /// get profit for this wallet started from the first day of current month
         /// </summary>
-        /// <param name="walletId">walet id</param>
         /// <returns>amount of profit</returns>
-        public decimal GetThisMonthProfit(Wallet wallet)
+        public decimal GetThisMonthProfit(Wallet.Wallet wallet)
         {
             return wallet.MonthProfit(this);
         }
@@ -150,9 +146,8 @@ namespace ExpenceManager
         /// <summary>
         /// get spends for this wallet started from the first day of current month
         /// </summary>
-        /// <param name="walletId">wallet id</param>
         /// <returns>amount of spends</returns>
-        public decimal GetThisMonthSpends(Wallet wallet)
+        public decimal GetThisMonthSpends(Wallet.Wallet wallet)
         {
             return wallet.MonthSpends(this);
         }

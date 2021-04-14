@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace ExpenceManager
+namespace ExpenceManagerModels.Wallet
 {
     /// <summary>
-    /// class for Wallet exeptions
+    /// class for Wallet exceptions
     /// </summary>
     public class WalletException : Exception
     {

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using DataStorage;
-using ExpenceManager;
 
 namespace ExpenceManagerModels.Users
 {
-    public class UserDB : IStorable
+    public class UserDb : IStorable
     {
-        public UserDB(string login, string password, string name, string surname, string email)
+        public UserDb(string login, string password, string name, string surname, string email)
         {
             Guid = Guid.NewGuid();
             Login = login;
@@ -19,7 +18,7 @@ namespace ExpenceManagerModels.Users
         }
 
         [JsonConstructor]
-        public UserDB(Guid guid, string login, string password, string name, string surname, string email, List<Category> categories)
+        public UserDb(Guid guid, string login, string password, string name, string surname, string email, List<Category> categories)
         {
             Guid = guid;
             Login = login;

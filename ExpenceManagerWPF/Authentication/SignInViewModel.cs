@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using ExpenceManager;
 using ExpenceManagerModels;
+using ExpenceManagerModels.Users;
 using ExpenceManagerWPF.Navigation;
 using Prism.Commands;
 using Services;
