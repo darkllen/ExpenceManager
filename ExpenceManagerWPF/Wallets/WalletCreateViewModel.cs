@@ -154,7 +154,7 @@ namespace ExpenceManagerWPF.Wallets
             var service = new WalletService();
             try
             {
-                AuthenticationService.CurrentUser.CreateNewWallet(_wallet.Name, _wallet.CurrBalance, _wallet.Description, _wallet.Currency);
+                AuthenticationService.CurrentUser.CreateNewWallet(_wallet.Name, _wallet.CurrBalance, _wallet.Description, _wallet.Currency, _wallet.Guid);
                 await service.SaveUpdateWallet(AuthenticationService.CurrentUser, _wallet);
             }
             catch (Exception ex)

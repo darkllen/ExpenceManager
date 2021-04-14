@@ -61,6 +61,16 @@ namespace ExpenceManagerModels.Users
             return wallet;
         }
 
+        public Wallet.Wallet CreateNewWallet(string name,
+            decimal startBalance,
+            string description,
+            string currency, Guid guid)
+        {
+            //create wallet and assign it to user
+            Wallet.Wallet wallet = Wallet.Wallet.CreateWalletForUser(this, name, startBalance, description, currency, guid);
+            return wallet;
+        }
+
 
         /// <summary>
         /// share wallet with another user

@@ -192,7 +192,7 @@ namespace ExpenceManagerModels.Wallet
             decimal sum = 0;
             foreach (Transaction transaction in Transactions)
             {
-                if (cond(transaction.Amount) && transaction.DateTime > dt) sum += transaction.ConvertTo(Currency);
+                if (cond(transaction.Amount) && transaction.DateTime >= dt) sum += transaction.ConvertTo(Currency);
             }
             return sum;
         }
