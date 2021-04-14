@@ -1,4 +1,5 @@
 using System;
+using ExpenceManagerModels;
 using Xunit;
 
 
@@ -7,7 +8,7 @@ namespace ExpenceManager.Tests
 
     public class UserTest
     {
-        public class TestCreation
+        public class Creation
         {
             /// <summary>
             /// test wallet creation
@@ -21,7 +22,7 @@ namespace ExpenceManager.Tests
             }
         }
 
-        public class TestGetters
+        public class Getters
         {
             /// <summary>
             /// test getting own wallets ids
@@ -53,7 +54,7 @@ namespace ExpenceManager.Tests
             }
         }
 
-        public class TestSharing
+        public class Sharing
         {
             /// <summary>
             /// trying to share wrong wallet
@@ -98,10 +99,10 @@ namespace ExpenceManager.Tests
             }
         }
 
-        public class TestCategoriesPermissiions
+        public class CategoriesPermissions
         {
             /// <summary>
-            /// trying to change permisiion on wrong category
+            /// trying to change permission on wrong category
             /// </summary>
             [Fact]
             public void TestSwitchPermissionWrongCategory()
@@ -113,7 +114,7 @@ namespace ExpenceManager.Tests
             }
 
             /// <summary>
-            /// trying to change permisiion on category of wrong wallet
+            /// trying to change permission on category of wrong wallet
             /// </summary>
             [Fact]
             public void TestSwitchPermissionCategoryWrongWallet()
@@ -148,7 +149,7 @@ namespace ExpenceManager.Tests
         }
 
 
-        public class TestWorkingWithTransactions
+        public class WorkingWithTransactions
         {
             /// <summary>
             /// trying to add transaction to a wrong wallet
@@ -335,7 +336,7 @@ namespace ExpenceManager.Tests
             }
         }
 
-        public class TestGetWalletStats
+        public class GetWalletStats
         {
             /// <summary>
             /// test showing balance of wallet

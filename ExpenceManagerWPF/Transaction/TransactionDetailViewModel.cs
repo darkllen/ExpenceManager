@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ExpenceManager;
+using ExpenceManagerModels;
 using Prism.Commands;
 using Prism.Mvvm;
 using Services;

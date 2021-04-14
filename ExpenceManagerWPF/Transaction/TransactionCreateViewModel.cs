@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ExpenceManager;
+using ExpenceManagerModels;
 using ExpenceManagerModels.Wallet;
 using ExpenceManagerWPF.Navigation;
 using Prism.Commands;
