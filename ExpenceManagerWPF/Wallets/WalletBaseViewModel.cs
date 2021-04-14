@@ -1,5 +1,4 @@
-﻿using System;
-using ExpenceManagerWPF.Categories;
+﻿using ExpenceManagerWPF.Categories;
 using ExpenceManagerWPF.Navigation;
 using ExpenceManagerWPF.Transaction;
 

@@ -3,7 +3,7 @@
 namespace ExpenceManagerModels.Users
 {
     /// <summary>
-    /// class for User exeptions
+    /// class for User exceptions
     /// </summary>
     public class UserException : Exception
     {
