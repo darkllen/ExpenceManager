@@ -85,7 +85,7 @@ namespace ExpenceManagerWPF.Categories
             try
             {
                 AuthenticationService.CurrentUser.Categories.Add(_category);
-                await service.recordCategories(AuthenticationService.CurrentUser);
+                await service.RecordCategories(AuthenticationService.CurrentUser);
             }
             catch (Exception ex)
             {
@@ -103,7 +103,7 @@ namespace ExpenceManagerWPF.Categories
             try
             {
                 AuthenticationService.CurrentUser.Categories.Remove(_currentCategory);
-                await service.recordCategories(AuthenticationService.CurrentUser);
+                await service.RecordCategories(AuthenticationService.CurrentUser);
 
                 foreach (var wallet in AuthenticationService.CurrentUser.Wallets)
                 {
@@ -192,7 +192,7 @@ namespace ExpenceManagerWPF.Categories
 
         private bool IsValidRemove()
         {
-            return _currentCategory != null && _currentCategory!=Category.DefaultCategory;
+            return _currentCategory != null && !Equals(_currentCategory, Category.DefaultCategory);
         }
 
 
@@ -210,7 +210,7 @@ namespace ExpenceManagerWPF.Categories
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

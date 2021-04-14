@@ -96,7 +96,6 @@ namespace ExpenceManagerWPF.Authentication
             {
                 var authService = new AuthenticationService();
                 var walletService = new WalletService();
-                User user = null;
                 try
                 {
                     IsEnabled = false;

@@ -167,7 +167,7 @@ namespace ExpenceManagerWPF.Wallets
             _gotoWallets.Invoke();
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public WalletsNavigatableTypes Type
         {

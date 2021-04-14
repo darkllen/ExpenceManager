@@ -112,7 +112,7 @@ namespace ExpenceManagerWPF.Transaction
         {
             _transaction = transaction;
             _update = update;
-            UpdateTransactionCommand = new DelegateCommand(updateTransaction, IsValid);
+            UpdateTransactionCommand = new DelegateCommand(UpdateTransaction, IsValid);
         }
 
         private bool IsValid()
@@ -146,7 +146,7 @@ namespace ExpenceManagerWPF.Transaction
         }
 
 
-        private async void updateTransaction()
+        private async void UpdateTransaction()
         {
 
             var service = new TransactionService();

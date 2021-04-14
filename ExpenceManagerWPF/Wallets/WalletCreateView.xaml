@@ -10,7 +10,7 @@
             <wallets:WalletsView></wallets:WalletsView>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>

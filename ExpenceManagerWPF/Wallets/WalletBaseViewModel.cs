@@ -7,9 +7,7 @@ namespace ExpenceManagerWPF.Wallets
 {
     public class WalletBaseViewModel : NavigationBase<WalletsNavigatableTypes>, INavigatable<MainNavigatableTypes>
     {
-        private Action _signInSuccess;
-
-
+        
         public WalletBaseViewModel()
         {
             Navigate(WalletsNavigatableTypes.Wallet);

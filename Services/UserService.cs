@@ -13,7 +13,7 @@ namespace Services
     {
         private FileDataStorage<UserDb> _storage = new FileDataStorage<UserDb>();
 
-        public async Task<bool> recordCategories(User user)
+        public async Task<bool> RecordCategories(User user)
         {
             UserDb userDb = await _storage.GetAsync(user.Guid);
             userDb.Categories = user.Categories;

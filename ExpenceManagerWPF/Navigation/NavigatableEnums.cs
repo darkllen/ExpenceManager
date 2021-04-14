@@ -9,8 +9,7 @@
     public enum MainNavigatableTypes
     {
         Auth,
-        Wallets,
-        Transactions
+        Wallets
     }
 
     public enum WalletsNavigatableTypes
@@ -18,8 +17,7 @@
         Wallet,
         WalletCreation,
         TransactionCreation,
-        CategoryCreation,
-        CategoryManagement
+        CategoryCreation
     }
 
 }

@@ -108,7 +108,7 @@ namespace ExpenceManagerWPF.Wallets
         public WalletDetailsViewModel(Wallet wallet)
         {
             _wallet = wallet;
-            UpdateWalletCommand = new DelegateCommand(updateWallet, IsValid);
+            UpdateWalletCommand = new DelegateCommand(UpdateWallet, IsValid);
         }
 
         private bool IsValid()
@@ -148,7 +148,7 @@ namespace ExpenceManagerWPF.Wallets
         }
 
 
-        private async void updateWallet()
+        private async void UpdateWallet()
         {
 
             var service = new WalletService();

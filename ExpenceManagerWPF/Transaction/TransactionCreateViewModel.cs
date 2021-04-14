@@ -180,7 +180,7 @@ namespace ExpenceManagerWPF.Transaction
             _gotoWallets.Invoke();
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public WalletsNavigatableTypes Type
         {
@@ -191,7 +191,7 @@ namespace ExpenceManagerWPF.Transaction
         }
         public void ClearSensitiveData()
         {
-            _transaction = new(WalletService.CurrentWallet.Currency);
+            _transaction = new ExpenceManagerModels.Transaction(WalletService.CurrentWallet.Currency);
         }
 
         public void Update()
