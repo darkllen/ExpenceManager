@@ -18,7 +18,7 @@ namespace ExpenceManager
         //categories are public, so we can change them easy
         public List<Category> Categories { get; }
 
-        public User(string name, string surname, string email, Guid guid)
+        public User(string name, string surname, string email, Guid guid, List<Category> categories)
         {   
             Name = name;
             Surname = surname;
@@ -26,7 +26,7 @@ namespace ExpenceManager
             Guid = guid;
             Wallets = new List<Wallet>();
             WalletsShared = new List<Wallet>();
-            Categories = new List<Category>();
+            Categories = categories;
         }
 
         public User(string name, string surname, string email)

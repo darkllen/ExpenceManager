@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using DataStorage;
+using ExpenceManager;
 
 namespace ExpenceManagerModels.Users
 {
@@ -17,7 +19,7 @@ namespace ExpenceManagerModels.Users
         }
 
         [JsonConstructor]
-        public UserDB(Guid guid, string login, string password, string name, string surname, string email)
+        public UserDB(Guid guid, string login, string password, string name, string surname, string email, List<Category> categories)
         {
             Guid = guid;
             Login = login;
@@ -25,6 +27,7 @@ namespace ExpenceManagerModels.Users
             Name = name;
             Surname = surname;
             Email = email;
+            Categories = categories;
         }
 
         public Guid Guid { get; }
@@ -34,5 +37,7 @@ namespace ExpenceManagerModels.Users
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
+
+        public List<Category> Categories { get; set; }
     }
 }

@@ -27,6 +27,14 @@ namespace ExpenceManagerWPF.Wallets
             }
         }
 
+        public Wallet Wallet
+        {
+            get
+            {
+                return _wallet;
+            }
+        }
+
         public Guid Guid
         {
             get

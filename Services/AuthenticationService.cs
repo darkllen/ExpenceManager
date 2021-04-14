@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataStorage;
@@ -32,8 +33,9 @@ namespace Services
                 throw new UserException("Wrong Login or Password");
             }
 
+            dbUser.Categories ??= new List<Category>();
 
-            CurrentUser = new User(dbUser.Name, dbUser.Surname, dbUser.Email, dbUser.Guid);
+            CurrentUser = new User(dbUser.Name, dbUser.Surname, dbUser.Email, dbUser.Guid, dbUser.Categories);
             return CurrentUser;
         }
 

@@ -1,5 +1,7 @@
 ﻿using System;
+using ExpenceManagerWPF.Categories;
 using ExpenceManagerWPF.Navigation;
+using ExpenceManagerWPF.Transaction;
 
 namespace ExpenceManagerWPF.Wallets
 {
@@ -17,11 +19,19 @@ namespace ExpenceManagerWPF.Wallets
         {
             if (type == WalletsNavigatableTypes.Wallet)
             {
-                return new WalletsViewModel(() => Navigate(WalletsNavigatableTypes.Creation));
+                return new WalletsViewModel(() => Navigate(WalletsNavigatableTypes.WalletCreation), () => Navigate(WalletsNavigatableTypes.TransactionCreation), ()=>Navigate(WalletsNavigatableTypes.CategoryCreation), () => Navigate(WalletsNavigatableTypes.Wallet));
+            }
+            else if (type == WalletsNavigatableTypes.WalletCreation)
+            {
+                return new WalletCreateViewModel(() => Navigate(WalletsNavigatableTypes.Wallet));
+            }
+            else if (type == WalletsNavigatableTypes.CategoryCreation)
+            {
+                return new CategoryViewModel(() => Navigate(WalletsNavigatableTypes.Wallet));
             }
             else
             {
-                return new WalletCreateViewModel(() => Navigate(WalletsNavigatableTypes.Wallet));
+                return new TransactionCreateViewModel(() => Navigate(WalletsNavigatableTypes.Wallet));
             }
         }
 

@@ -9,14 +9,18 @@ namespace Services
     public class WalletService
     {
         private FileDataStorage<WalletDB> _storage = new FileDataStorage<WalletDB>();
+        public static Wallet CurrentWallet; 
 
 
         public async Task<User> LoadUserWallets(User user)
         {
+            var transactService = new TransactionService();
             List<WalletDB> wallets = await _storage.GetAllAsyncForObject(user);
             foreach (var wallet in wallets)
             {
-                Wallet.CreateWalletForUser(user, wallet.Name, wallet.CurrBalance, wallet.Description, wallet.Currency, wallet.Guid);
+               Wallet wallet_cr = Wallet.CreateWalletForUser(user, wallet.Name, wallet.CurrBalance, wallet.Description, wallet.Currency, wallet.Guid);
+               await transactService.LoadWalletTransactions(wallet_cr);
+
             }
             return user;
         }

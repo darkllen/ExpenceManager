@@ -22,7 +22,11 @@ namespace ExpenceManagerWPF.Navigation
         protected void Navigate(TObject type)
         {
             if (CurrentViewModel != null && CurrentViewModel.Type.Equals(type))
+            {
+                CurrentViewModel.Update();
                 return;
+            }
+                
             INavigatable<TObject> viewModel = _viewModels.FirstOrDefault(authNavigatable => authNavigatable.Type.Equals(type));
 
             if (viewModel == null)

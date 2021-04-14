@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:wallets="clr-namespace:ExpenceManagerWPF.Wallets"
+             xmlns:transaction="clr-namespace:ExpenceManagerWPF.Transaction"
+             xmlns:categories="clr-namespace:ExpenceManagerWPF.Categories"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -13,6 +15,12 @@
         </DataTemplate>
         <DataTemplate DataType="{ x:Type wallets:WalletCreateViewModel}">
             <wallets:WalletCreateView></wallets:WalletCreateView>
+        </DataTemplate>
+        <DataTemplate DataType="{ x:Type transaction:TransactionCreateViewModel}">
+            <transaction:TransactionCreateView></transaction:TransactionCreateView>
+        </DataTemplate>
+        <DataTemplate DataType="{ x:Type categories:CategoryViewModel}">
+            <categories:CategoryView></categories:CategoryView>
         </DataTemplate>
     </UserControl.Resources>
     <ContentControl Content="{Binding CurrentViewModel}"></ContentControl>

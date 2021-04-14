@@ -175,7 +175,7 @@ namespace ExpenceManagerWPF.Wallets
         {
             get
             {
-                return WalletsNavigatableTypes.Creation;
+                return WalletsNavigatableTypes.WalletCreation;
             }
         }
         public void ClearSensitiveData()

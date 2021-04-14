@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="ExpenceManagerWPF.Categories.CategoryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExpenceManagerWPF.Categories"
+        mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate DataType="{ x:Type local:CategoryViewModel}">
+            <local:CategoryView></local:CategoryView>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition MinHeight="100" Height="Auto"></RowDefinition>
+            <RowDefinition MinHeight="50" MaxHeight="50"></RowDefinition>
+            <RowDefinition MinHeight="100" MaxHeight="100"></RowDefinition>
+            <RowDefinition MinHeight="100" MaxHeight="100"></RowDefinition>
+            <RowDefinition MinHeight="50" MaxHeight="50"></RowDefinition>
+            <RowDefinition MinHeight="50" MaxHeight="50"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="0" Grid.RowSpan="2" ItemsSource="{Binding Categories}" 
+                  DisplayMemberPath="Name" SelectedItem="{Binding CurrentCategory}"></ListView>
+        <Button Grid.Row="1" Command="{Binding RemoveCategoryCommand}" >Remove Selected</Button>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Category name</TextBlock>
+            <TextBox Name="TbName" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding NameErr}"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Category description</TextBlock>
+            <TextBox Name="TbDescription" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding DescriptionErr}"></TextBlock>
+        </StackPanel>
+        <Button Grid.Row="4"  Command="{Binding AddCategoryCommand}" >Add category</Button>
+        <Button Grid.Row="5"  Command="{Binding GoBack}" >Go back</Button>
+    </Grid>
+</UserControl>

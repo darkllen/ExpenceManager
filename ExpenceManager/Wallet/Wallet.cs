@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using DataStorage;
 
 namespace ExpenceManager
 {
 
-    public class Wallet
+    public class Wallet : IStorable
     {
         public Guid Guid { get; }
         public string Name { get; set; }
+
+        public decimal StartBalance { get; set; }
         public decimal CurrBalance { get; set; }
         public string Description { get; set; }
         public string Currency { get; }
@@ -57,8 +61,9 @@ namespace ExpenceManager
             PossibleCategories = possibleCategories;
 
             CurrBalance = balance;
+            StartBalance = balance;
 
-            Guid = new Guid();
+            Guid = Guid.NewGuid();
             Transactions = new List<Transaction>();
             RestrictedCategories = new List<Category>();
         }
@@ -79,6 +84,7 @@ namespace ExpenceManager
             PossibleCategories = possibleCategories;
 
             CurrBalance = balance;
+            StartBalance = balance;
             Guid = guid;
             Transactions = new List<Transaction>();
             RestrictedCategories = new List<Category>();
@@ -121,8 +127,11 @@ namespace ExpenceManager
         public void RemoveTransaction(User user, Transaction transaction)
         {
             CheckRightsAny(user);
+
             Transactions.Remove(transaction);
-            CurrBalance -= transaction.Amount;
+            CurrBalance = Transactions.Aggregate(StartBalance, (x, y) => x + y.Amount);
+            // CurrBalance -= transaction.Amount;
+            
         }
 
         /// <summary>
