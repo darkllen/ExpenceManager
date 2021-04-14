@@ -52,6 +52,8 @@ namespace ExpenceManagerWPF.Wallets
                 OnPropertyChanged(nameof(CurrentTransaction));
                 OnPropertyChanged(nameof(Transactions));
                 GoToTransactionCreation.RaiseCanExecuteChanged();
+                RemoveWalletCommand.RaiseCanExecuteChanged();
+
             }
         }
 
@@ -67,6 +69,7 @@ namespace ExpenceManagerWPF.Wallets
                 _currentTransaction = value;
                 OnPropertyChanged(nameof(CurrentWallet));
                 OnPropertyChanged(nameof(CurrentTransaction));
+                RemoveTransactionCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -93,13 +96,18 @@ namespace ExpenceManagerWPF.Wallets
             _categoryCreation = categoryCreation;
             _update = update;
             GoToWalletCreation = new DelegateCommand(_gotoWalletCreation);
-            GoToTransactionCreation = new DelegateCommand(_gotoTransactionCreation, isSelected);
+            GoToTransactionCreation = new DelegateCommand(_gotoTransactionCreation, IsSelectedWallet);
             GoToCategoryCreation = new DelegateCommand(_categoryCreation);
-            RemoveWalletCommand = new DelegateCommand(RemoveWallet);
-            RemoveTransactionCommand = new DelegateCommand(RemoveTransaction);
+            RemoveWalletCommand = new DelegateCommand(RemoveWallet, IsSelectedWallet);
+            RemoveTransactionCommand = new DelegateCommand(RemoveTransaction, IsSelectedTransaction);
         }
 
-        private bool isSelected()
+
+        private bool IsSelectedTransaction()
+        {
+            return CurrentTransaction != null;
+        }
+        private bool IsSelectedWallet()
         {
             return WalletService.CurrentWallet != null;
         }
@@ -108,27 +116,22 @@ namespace ExpenceManagerWPF.Wallets
         public async void RemoveTransaction()
         {
             TransactionService service = new TransactionService();
-
-
             WalletService.CurrentWallet.RemoveTransaction(AuthenticationService.CurrentUser, CurrentTransaction.Transaction);
             await service.RemoveTransaction(CurrentTransaction.Transaction);
             Transactions.Remove(CurrentTransaction);
             OnPropertyChanged(nameof(Transactions));
-
-            
-
-            //AuthenticationService.CurrentUser.Wallets.RemoveAll(x => x.Guid == wallet.Guid);
             MessageBox.Show("Transaction was removed");
             Update();
         }
 
         public async void RemoveWallet()
         {
+           
             WalletService service = new WalletService();
             WalletDB wallet = new WalletDB(_currentWallet.Guid, _currentWallet.Name, _currentWallet.Wallet.CurrBalance, _currentWallet.Description,
-                _currentWallet.Currency);
+                    _currentWallet.Currency);
             await service.RemoveWallet(wallet);
-            AuthenticationService.CurrentUser.Wallets.RemoveAll(x=>x.Guid==wallet.Guid);
+            AuthenticationService.CurrentUser.Wallets.RemoveAll(x => x.Guid == wallet.Guid);
             MessageBox.Show("Wallet was removed");
             Update();
         }
