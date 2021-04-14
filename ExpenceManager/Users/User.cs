@@ -26,6 +26,8 @@ namespace ExpenceManager
             Guid = guid;
             Wallets = new List<Wallet>();
             WalletsShared = new List<Wallet>();
+
+            if (!categories.Contains(Category.DefaultCategory))categories.Add(Category.DefaultCategory);
             Categories = categories;
         }
 
@@ -37,7 +39,7 @@ namespace ExpenceManager
             Guid = new Guid();
             Wallets = new List<Wallet>();
             WalletsShared = new List<Wallet>();
-            Categories = new List<Category>();
+            Categories = new List<Category>() {Category.DefaultCategory};
         }
 
         /// <summary>

@@ -99,10 +99,23 @@ namespace ExpenceManagerWPF.Categories
         private async void RemoveCategory()
         {
             var service = new UserService();
+            var tservice = new TransactionService();
             try
             {
                 AuthenticationService.CurrentUser.Categories.Remove(_currentCategory);
                 await service.recordCategories(AuthenticationService.CurrentUser);
+
+                foreach (var wallet in AuthenticationService.CurrentUser.Wallets)
+                {
+                    foreach (var transaction in wallet.GetAllTransactions(AuthenticationService.CurrentUser))
+                    {
+                        if (Equals(transaction.Category, _currentCategory))
+                        {
+                            transaction.Category = Category.DefaultCategory;
+                            await tservice.SaveUpdateTransaction(wallet, transaction);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -179,7 +192,7 @@ namespace ExpenceManagerWPF.Categories
 
         private bool IsValidRemove()
         {
-            return _currentCategory != null;
+            return _currentCategory != null && _currentCategory!=Category.DefaultCategory;
         }
 
 

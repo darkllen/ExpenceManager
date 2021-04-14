@@ -109,7 +109,7 @@ namespace ExpenceManager.Tests
                 var user = new User("user", "user", "mail");
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
-                Assert.Throws<UserException>(() => user.SwitchCategoryPermisiion(wallet, new Category("s", "s", "s")));
+                Assert.Throws<UserException>(() => user.SwitchCategoryPermisiion(wallet, new Category("s", "s")));
             }
 
             /// <summary>
@@ -123,7 +123,7 @@ namespace ExpenceManager.Tests
 
                 var user = new User("user", "user", "mail");
 
-                Assert.Throws<UserException>(() => user.SwitchCategoryPermisiion(wrongWallet, new Category("s", "s", "s")));
+                Assert.Throws<UserException>(() => user.SwitchCategoryPermisiion(wrongWallet, new Category("s", "s")));
             }
 
             /// <summary>
@@ -134,7 +134,7 @@ namespace ExpenceManager.Tests
             {
                 var user = new User("user", "user", "mail");
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
 
                 user.SwitchCategoryPermisiion(wallet, category);
@@ -160,7 +160,7 @@ namespace ExpenceManager.Tests
                 var wrongWallet = userWrong.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today);
@@ -174,7 +174,7 @@ namespace ExpenceManager.Tests
             public void TestAddTwoSameTransactions()
             {
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
@@ -194,7 +194,7 @@ namespace ExpenceManager.Tests
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 user.ShareWalletWithUser(wallet, user2);
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user2.Categories.Add(category);
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today);
@@ -211,7 +211,7 @@ namespace ExpenceManager.Tests
                 var userWrong = new User("user", "user", "mail");
                 var wrongWallet = userWrong.CreateNewWallet("wallet", 0, "wallet", "USD");
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
 
                 var transaction = new Transaction(23, "USD", category, "S", DateTime.Today);
@@ -225,7 +225,7 @@ namespace ExpenceManager.Tests
             public void TestRemoveTransaction()
             {
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
@@ -245,7 +245,7 @@ namespace ExpenceManager.Tests
                 var wrongWallet = userWrong.CreateNewWallet("wallet", 0, "wallet", "USD");
                 var start = 0;
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
 
                 Assert.Throws<UserException>(() => user.Get10Transactions(wrongWallet, start));
@@ -260,7 +260,7 @@ namespace ExpenceManager.Tests
                 var expected = 1;
                 var start = 0;
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
@@ -280,7 +280,7 @@ namespace ExpenceManager.Tests
                 var expected = 1;
                 var start = 1;
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
@@ -302,7 +302,7 @@ namespace ExpenceManager.Tests
                 var expected = 0;
                 var start = 1;
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
@@ -321,7 +321,7 @@ namespace ExpenceManager.Tests
                 var expected = 10;
                 var start = 0;
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
@@ -344,7 +344,7 @@ namespace ExpenceManager.Tests
             public void TestGetWalletBalance()
             {
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
@@ -363,7 +363,7 @@ namespace ExpenceManager.Tests
             {
                 var start = 0;
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
                 var wallet = user.CreateNewWallet("wallet", start, "wallet", "USD");
 
@@ -384,7 +384,7 @@ namespace ExpenceManager.Tests
             public void TestGetWalletMonthProfit()
             {
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
@@ -408,7 +408,7 @@ namespace ExpenceManager.Tests
                 var wrongWallet = userWrong.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
@@ -425,7 +425,7 @@ namespace ExpenceManager.Tests
             public void TestGetWalletMonthSpends()
             {
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
                 var wallet = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 
@@ -449,7 +449,7 @@ namespace ExpenceManager.Tests
                 var wrongWallet = userWrong.CreateNewWallet("wallet", 0, "wallet", "USD");
 
                 var user = new User("user", "user", "mail");
-                Category category = new Category("s", "s", "s");
+                Category category = new Category("s", "s");
                 user.Categories.Add(category);
                 var id = user.CreateNewWallet("wallet", 0, "wallet", "USD");
 

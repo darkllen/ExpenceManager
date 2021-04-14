@@ -2,18 +2,17 @@
 
 namespace ExpenceManager
 {
+
     public class Category
     {
+        public static Category DefaultCategory = new("", ""); 
         public string Name { get; set; }
         public string Description { get; set; }
-        //path to icon
-        public string Icon { get; set; }
 
-        public Category(string name, string description, string icon)
+        public Category(string name, string description)
         {
             Name = name;
             Description = description;
-            Icon = icon;
         }
 
         public Category()
@@ -22,7 +21,7 @@ namespace ExpenceManager
 
         protected bool Equals(Category other)
         {
-            return Name == other.Name && Description == other.Description && Icon == other.Icon;
+            return Name == other.Name && Description == other.Description;
         }
 
         public override bool Equals(object obj)
@@ -35,7 +34,7 @@ namespace ExpenceManager
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Name, Description, Icon);
+            return HashCode.Combine(Name, Description);
         }
     }
 }
