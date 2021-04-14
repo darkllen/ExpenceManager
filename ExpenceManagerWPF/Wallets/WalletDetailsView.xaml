@@ -12,6 +12,8 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" >
             <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Name</TextBlock>
@@ -32,11 +34,23 @@
                      Text="{Binding CurrBalance, Mode=OneWay}"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="3" >
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Current Month profit</TextBlock>
+            <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch" 
+                     IsEnabled="False"
+                     Text="{Binding Profit, Mode=OneWay}"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="4" >
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Current Month spends</TextBlock>
+            <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch"  
+                     IsEnabled="False"
+                     Text="{Binding Spends, Mode=OneWay}"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="5" >
             <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Currency</TextBlock>
             <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch" 
                      IsEnabled="False"
                      Text="{Binding Currency, Mode=OneWay}"></TextBox>
         </StackPanel>
-        <Button Grid.Row="4" Command="{Binding UpdateWalletCommand}">Save changes</Button>
+        <Button Grid.Row="6" Command="{Binding UpdateWalletCommand}">Save changes</Button>
     </Grid>
 </UserControl>

@@ -45,9 +45,9 @@
             <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding CurrentCategoryErr}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.ColumnSpan="2" Grid.Row="3">
-            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Start Date</TextBlock>
-            <DatePicker SelectedDateFormat="Long"
-                        Name="TbStartBalance" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch" Text="{Binding DateTime, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Date</TextBlock>
+            <DatePicker SelectedDateFormat="Long" SelectedDate="{Binding DateTime, UpdateSourceTrigger=PropertyChanged}"
+                        Name="TbStartBalance" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch"></DatePicker>
             <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding DateTimeErr}"></TextBlock>
         </StackPanel>
 

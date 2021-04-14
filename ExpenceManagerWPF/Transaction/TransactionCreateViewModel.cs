@@ -115,18 +115,6 @@ namespace ExpenceManagerWPF.Transaction
                 OnPropertyChanged(nameof(DescriptionErr));
             }
 
-            if (Amount < 0)
-            {
-                AmountErr = "Amount can't be less than 0";
-                OnPropertyChanged(nameof(AmountErr));
-                valid = false;
-            }
-            else
-            {
-                AmountErr = "";
-                OnPropertyChanged(nameof(AmountErr));
-            }
-
             if (CurrentCategory == null)
             {
                 CurrentCategoryErr = "Category is necessary";

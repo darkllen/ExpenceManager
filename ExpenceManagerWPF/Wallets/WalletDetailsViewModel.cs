@@ -12,6 +12,23 @@ namespace ExpenceManagerWPF.Wallets
     {
         private Wallet _wallet;
 
+
+        public decimal Profit
+        {
+            get
+            {
+                return _wallet.MonthProfit(AuthenticationService.CurrentUser);
+            }
+        }
+
+        public decimal Spends
+        {
+            get
+            {
+                return _wallet.MonthSpends(AuthenticationService.CurrentUser);
+            }
+        }
+
         public string NameErr { get; set; }
         public string Name
         {
