@@ -20,6 +20,24 @@ namespace ExpenceManagerWPF.Transaction
         private Action _gotoWallets;
 
 
+        public List<string> PossibleCurrency => Wallet.PossibleCurrency.Keys.ToList();
+
+        public string CurrencyErr { get; set; }
+        public string Currency
+        {
+            get
+            {
+                return _transaction.Currency;
+            }
+            set
+            {
+                _transaction.Currency = value;
+                OnPropertyChanged();
+                AddTransactionCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+
         public string CurrentCategoryErr { get; set; }
         public Category CurrentCategory
         {
@@ -125,6 +143,17 @@ namespace ExpenceManagerWPF.Transaction
             {
                 CurrentCategoryErr = "";
                 OnPropertyChanged(nameof(CurrentCategoryErr));
+            }
+            if (String.IsNullOrWhiteSpace(Currency))
+            {
+                CurrencyErr = "Choose currency";
+                OnPropertyChanged(nameof(CurrencyErr));
+                valid = false;
+            }
+            else
+            {
+                CurrencyErr = "";
+                OnPropertyChanged(nameof(CurrencyErr));
             }
 
 

@@ -34,13 +34,19 @@ namespace ExpenceManagerWPF.Wallets
             {
                 _currentTransaction = null;
                 _currentWallet = value;
-                WalletService.CurrentWallet = _currentWallet.Wallet;
+                WalletService.CurrentWallet = _currentWallet?.Wallet;
+
 
                 Transactions = new ObservableCollection<TransactionDetailViewModel>();
-                foreach (var transaction in _currentWallet.Wallet.Get10Transactions(AuthenticationService.CurrentUser, 0))
+
+                if (_currentWallet != null)
                 {
-                    Transactions.Add(new TransactionDetailViewModel(transaction, _update));
+                    foreach (var transaction in _currentWallet.Wallet.Get10Transactions(AuthenticationService.CurrentUser, 0))
+                    {
+                        Transactions.Add(new TransactionDetailViewModel(transaction, _update));
+                    }
                 }
+
 
                 OnPropertyChanged(nameof(CurrentWallet));
                 OnPropertyChanged(nameof(CurrentTransaction));
@@ -119,7 +125,7 @@ namespace ExpenceManagerWPF.Wallets
         public async void RemoveWallet()
         {
             WalletService service = new WalletService();
-            WalletDB wallet = new WalletDB(_currentWallet.Guid, _currentWallet.Name, _currentWallet.CurrBalance, _currentWallet.Description,
+            WalletDB wallet = new WalletDB(_currentWallet.Guid, _currentWallet.Name, _currentWallet.Wallet.CurrBalance, _currentWallet.Description,
                 _currentWallet.Currency);
             await service.RemoveWallet(wallet);
             AuthenticationService.CurrentUser.Wallets.RemoveAll(x=>x.Guid==wallet.Guid);

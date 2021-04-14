@@ -13,19 +13,19 @@ namespace ExpenceManagerWPF.Wallets
         private Wallet _wallet;
 
 
-        public decimal Profit
+        public string Profit
         {
             get
             {
-                return _wallet.MonthProfit(AuthenticationService.CurrentUser);
+                return _wallet.MonthProfit(AuthenticationService.CurrentUser).ToString("#.##");
             }
         }
 
-        public decimal Spends
+        public string Spends
         {
             get
             {
-                return _wallet.MonthSpends(AuthenticationService.CurrentUser);
+                return _wallet.MonthSpends(AuthenticationService.CurrentUser).ToString("#.##");
             }
         }
 
@@ -79,11 +79,11 @@ namespace ExpenceManagerWPF.Wallets
             }
         }
 
-        public decimal CurrBalance
+        public string CurrBalance
         {
             get
             {
-                return _wallet.CurrBalance;
+                return _wallet.CurrBalance.ToString("#.##");
             }
 
         }
@@ -102,7 +102,7 @@ namespace ExpenceManagerWPF.Wallets
         {
             get
             {
-                return $"{_wallet.Name} ({_wallet.CurrBalance} {_wallet.Currency})";
+                return $"{_wallet.Name} ({_wallet.CurrBalance:#.##} {_wallet.Currency})";
             }
         }
 

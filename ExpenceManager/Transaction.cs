@@ -37,7 +37,6 @@ namespace ExpenceManager
             DateTime dateTime,
             Guid guid)
         {
-            Guid = Guid.NewGuid();
             Amount = amount;
             Currency = currency;
             Category = category;
@@ -46,6 +45,14 @@ namespace ExpenceManager
             Guid = guid;
         }
 
+        public decimal ConvertTo(string currency)
+        {
+            if (Currency == currency) return Amount;
+            if (!Wallet.PossibleCurrency.ContainsKey(currency)) throw new ArgumentException("wrong currency");
+            if (Currency == "UAH") return Amount / Wallet.PossibleCurrency[currency];
+            if (currency == "UAH") return Amount * Wallet.PossibleCurrency[Currency];
+            return (Amount * Wallet.PossibleCurrency[Currency]) / Wallet.PossibleCurrency[currency];
+        }
 
         public Transaction(string currency)
         {

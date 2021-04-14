@@ -50,9 +50,15 @@
                         Name="TbStartBalance" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch"></DatePicker>
             <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding DateTimeErr}"></TextBlock>
         </StackPanel>
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="4">
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Currency</TextBlock>
+            <ComboBox  ItemsSource="{Binding Path=PossibleCurrency}" SelectedValue="{Binding Path=Currency, UpdateSourceTrigger=PropertyChanged}"
+                       Name="TbCurr" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch"></ComboBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding CurrencyErr}"></TextBlock>
+        </StackPanel>
 
 
-        <Button Name="BSignIn" Grid.Column="0" Margin="10,10,10,10" Command="{Binding AddTransactionCommand}" Grid.Row="4">Add</Button>
-        <Button Name="BClose" Grid.Row="4" Grid.Column="1" Margin="10" Command="{Binding GoBackCommand}">Back</Button>
+        <Button Name="BSignIn" Grid.Column="0" Margin="10,10,10,10" Command="{Binding AddTransactionCommand}" Grid.Row="5">Add</Button>
+        <Button Name="BClose" Grid.Row="5" Grid.Column="1" Margin="10" Command="{Binding GoBackCommand}">Back</Button>
     </Grid>
 </UserControl>

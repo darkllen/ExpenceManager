@@ -8,6 +8,13 @@ namespace ExpenceManager
 
     public class Wallet : IStorable
     {
+        public static Dictionary<string, decimal> PossibleCurrency = new Dictionary<string, decimal>
+        {
+            {"UAH", 1},
+            {"USD", 28},
+            {"CNY", (decimal) 4.28}
+        };
+
         public Guid Guid { get; }
         public string Name { get; set; }
 
@@ -117,7 +124,7 @@ namespace ExpenceManager
             if (RestrictedCategories.Contains(transaction.Category)) throw new WalletException("transaction category is restricted for this wallet");
             if (!PossibleCategories.Contains(transaction.Category)) throw new WalletException("transaction category is not possible for this wallet");
             Transactions.Add(transaction);
-            CurrBalance += transaction.Amount;
+            CurrBalance += transaction.ConvertTo(Currency);
         }
 
         /// <summary>
@@ -129,9 +136,8 @@ namespace ExpenceManager
             CheckRightsAny(user);
 
             Transactions.Remove(transaction);
-            CurrBalance = Transactions.Aggregate(StartBalance, (x, y) => x + y.Amount);
-            // CurrBalance -= transaction.Amount;
-            
+            CurrBalance = Transactions.Aggregate(StartBalance, (x, y) => x + y.ConvertTo(Currency));
+
         }
 
         /// <summary>
@@ -176,7 +182,7 @@ namespace ExpenceManager
             decimal sum = 0;
             foreach (Transaction transaction in Transactions)
             {
-                if (cond(transaction.Amount) && transaction.DateTime > dt) sum += transaction.Amount;
+                if (cond(transaction.Amount) && transaction.DateTime > dt) sum += transaction.ConvertTo(Currency);
             }
             return sum;
         }

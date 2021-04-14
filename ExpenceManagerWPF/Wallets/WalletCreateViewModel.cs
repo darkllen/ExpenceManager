@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using ExpenceManager;
 using ExpenceManagerModels.Wallet;
 using Services;
 using ExpenceManagerWPF.Navigation;
@@ -24,6 +27,7 @@ namespace ExpenceManagerWPF.Wallets
             AddWalletCommand = new DelegateCommand(CreateWallet, IsValid);
         }
 
+        public List<string> PossibleCurrency => Wallet.PossibleCurrency.Keys.ToList();
 
         public string NameErr { get; set; }
         public string Name
@@ -120,16 +124,11 @@ namespace ExpenceManagerWPF.Wallets
 
             if (String.IsNullOrWhiteSpace(Currency))
             {
-                CurrencyErr = "Currency can't be empty";
+                CurrencyErr = "Choose currency";
                 OnPropertyChanged(nameof(CurrencyErr));
                 valid = false;
             }
-            else if (Currency.Length > 4)
-            {
-                CurrencyErr = "Currency can't be more than 4 symbols";
-                OnPropertyChanged(nameof(CurrencyErr));
-                valid = false;
-            } else
+            else 
             {
                 CurrencyErr = "";
                 OnPropertyChanged(nameof(CurrencyErr));

@@ -104,7 +104,7 @@ namespace ExpenceManagerWPF.Transaction
         {
             get
             {
-                return $"{_transaction.Description} ({_transaction.Amount})";
+                return $"{_transaction.Amount} {_transaction.Currency}";
             }
         }
 
