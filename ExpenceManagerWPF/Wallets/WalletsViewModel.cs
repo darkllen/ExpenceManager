@@ -41,7 +41,7 @@ namespace ExpenceManagerWPF.Wallets
 
                 if (_currentWallet != null)
                 {
-                    foreach (var transaction in _currentWallet.Wallet.Get10Transactions(AuthenticationService.CurrentUser, 0))
+                    foreach (var transaction in _currentWallet.Wallet.GetAllTransactions(AuthenticationService.CurrentUser))
                     {
                         Transactions.Add(new TransactionDetailViewModel(transaction, _update));
                     }
@@ -131,6 +131,13 @@ namespace ExpenceManagerWPF.Wallets
             WalletDB wallet = new WalletDB(_currentWallet.Guid, _currentWallet.Name, _currentWallet.Wallet.CurrBalance, _currentWallet.Description,
                     _currentWallet.Currency);
             await service.RemoveWallet(wallet);
+
+            TransactionService tservice = new TransactionService();
+            foreach (var transaction in _currentWallet.Wallet.GetAllTransactions(AuthenticationService.CurrentUser))
+            {
+                await tservice.RemoveTransaction(transaction);
+            }
+
             AuthenticationService.CurrentUser.Wallets.RemoveAll(x => x.Guid == wallet.Guid);
             MessageBox.Show("Wallet was removed");
             Update();

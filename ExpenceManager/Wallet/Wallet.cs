@@ -113,6 +113,12 @@ namespace ExpenceManager
             return returnedTransactions;
         }
 
+        public List<Transaction> GetAllTransactions(User user)
+        {
+            CheckRightsAny(user);
+            return Transactions;
+        }
+
         /// <summary>
         /// add transaction to wallet if possible
         /// </summary>

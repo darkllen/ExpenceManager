@@ -33,6 +33,8 @@ namespace Services
 
         public async Task<bool> RemoveWallet(WalletDB wallet)
         {
+            var transactService = new TransactionService();
+
             await _storage.RemoveObj(wallet);
             return true;
         }
