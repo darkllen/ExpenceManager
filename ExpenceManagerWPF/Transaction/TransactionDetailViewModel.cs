@@ -26,6 +26,20 @@ namespace ExpenceManagerWPF.Transaction
             }
         }
 
+        public string DateTimeErr { get; set; }
+        public DateTime DateTime
+        {
+            get
+            {
+                return _transaction.DateTime;
+            }
+            set
+            {
+                _transaction.DateTime = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public string AmountErr { get; set; }
         public decimal Amount
         {

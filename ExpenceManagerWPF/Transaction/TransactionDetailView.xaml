@@ -29,8 +29,14 @@
         <StackPanel Grid.Row="2" >
             <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Category</TextBlock>
             <ComboBox  ItemsSource="{Binding Path=Categories}" DisplayMemberPath="Name" SelectedValue="{Binding Path=CurrentCategory}"
-                       Name="Tb" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch"></ComboBox>
+                       Name="TbCat" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch"></ComboBox>
             <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding CategoryErr}"></TextBlock>
+        </StackPanel>
+        <StackPanel  Grid.Row="3">
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Date</TextBlock>
+            <DatePicker SelectedDateFormat="Long" SelectedDate="{Binding DateTime, UpdateSourceTrigger=PropertyChanged}"
+                        Name="TbStartBalance" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch"></DatePicker>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding DateTimeErr}"></TextBlock>
         </StackPanel>
         <Button Grid.Row="4" Command="{Binding UpdateTransactionCommand}">Save changes</Button>
     </Grid>
