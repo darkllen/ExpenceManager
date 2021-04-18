@@ -54,6 +54,16 @@ namespace ExpenceManagerModels
             return (Amount * Wallet.Wallet.PossibleCurrency[Currency]) / Wallet.Wallet.PossibleCurrency[currency];
         }
 
+        public static decimal ConvertTo(string currencyOld,  string currency, decimal amount)
+        {
+            if (currencyOld == currency) return amount;
+            if (!Wallet.Wallet.PossibleCurrency.ContainsKey(currency)) throw new ArgumentException("wrong currency");
+            if (!Wallet.Wallet.PossibleCurrency.ContainsKey(currencyOld)) throw new ArgumentException("wrong currency");
+            if (currencyOld == "UAH") return amount / Wallet.Wallet.PossibleCurrency[currency];
+            if (currency == "UAH") return amount * Wallet.Wallet.PossibleCurrency[currencyOld];
+            return (amount * Wallet.Wallet.PossibleCurrency[currencyOld]) / Wallet.Wallet.PossibleCurrency[currency];
+        }
+
         public Transaction(string currency)
         {
             Guid = Guid.NewGuid();

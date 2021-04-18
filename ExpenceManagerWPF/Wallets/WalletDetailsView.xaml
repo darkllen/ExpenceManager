@@ -27,30 +27,31 @@
                      Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding DescriptionErr}"></TextBlock>
         </StackPanel>
-        <StackPanel Grid.Row="2" >
+        <StackPanel  Grid.Row="2">
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Currency</TextBlock>
+            <ComboBox  ItemsSource="{Binding Path=PossibleCurrency}" SelectedValue="{Binding Path=Currency, UpdateSourceTrigger=PropertyChanged}"
+                       Name="TbCurr" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch"></ComboBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding CurrencyErr}"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="3" >
             <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Current balance</TextBlock>
             <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch" 
                      IsEnabled="False"
                      Text="{Binding CurrBalance, Mode=OneWay}"></TextBox>
         </StackPanel>
-        <StackPanel Grid.Row="3" >
+        <StackPanel Grid.Row="4" >
             <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Current Month profit</TextBlock>
             <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch" 
                      IsEnabled="False"
                      Text="{Binding Profit, Mode=OneWay}"></TextBox>
         </StackPanel>
-        <StackPanel Grid.Row="4" >
+        <StackPanel Grid.Row="5" >
             <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Current Month spends</TextBlock>
             <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch"  
                      IsEnabled="False"
                      Text="{Binding Spends, Mode=OneWay}"></TextBox>
         </StackPanel>
-        <StackPanel Grid.Row="5" >
-            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Currency</TextBlock>
-            <TextBox MinWidth="300" Margin="10" HorizontalAlignment="Stretch" 
-                     IsEnabled="False"
-                     Text="{Binding Currency, Mode=OneWay}"></TextBox>
-        </StackPanel>
+
         <Button Grid.Row="6" Command="{Binding UpdateWalletCommand}">Save changes</Button>
     </Grid>
 </UserControl>

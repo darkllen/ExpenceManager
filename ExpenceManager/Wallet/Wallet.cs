@@ -22,7 +22,20 @@ namespace ExpenceManagerModels.Wallet
         public decimal StartBalance { get; set; }
         public decimal CurrBalance { get; set; }
         public string Description { get; set; }
-        public string Currency { get; }
+
+
+        private string _currency;
+        public string Currency
+        {
+            get => _currency;
+
+            set
+            {
+                StartBalance = Transaction.ConvertTo(_currency, value, StartBalance);
+                _currency = value;
+                CurrBalance = Transactions.Aggregate(StartBalance, (x, y) => x + y.ConvertTo(_currency));
+            }
+        }
 
         private List<Transaction> Transactions;
         private List<Category> PossibleCategories;
@@ -64,7 +77,7 @@ namespace ExpenceManagerModels.Wallet
         {
             Name = name;
             Description = description;
-            Currency = currency;
+            _currency = currency;
             //possibleCategories of Wallet are always actual as they changed with any changes in User categories
             PossibleCategories = possibleCategories;
 
@@ -87,7 +100,7 @@ namespace ExpenceManagerModels.Wallet
         {
             Name = name;
             Description = description;
-            Currency = currency;
+            _currency = currency;
             //possibleCategories of Wallet are always actual as they changed with any changes in User categories
             PossibleCategories = possibleCategories;
 
@@ -133,7 +146,7 @@ namespace ExpenceManagerModels.Wallet
             if (RestrictedCategories.Contains(transaction.Category)) throw new WalletException("transaction category is restricted for this wallet");
             if (!PossibleCategories.Contains(transaction.Category)) throw new WalletException("transaction category is not possible for this wallet");
             Transactions.Add(transaction);
-            CurrBalance += transaction.ConvertTo(Currency);
+            CurrBalance += transaction.ConvertTo(_currency);
         }
 
         /// <summary>
@@ -146,7 +159,7 @@ namespace ExpenceManagerModels.Wallet
             CheckRightsAny(user);
 
             Transactions.Remove(transaction);
-            CurrBalance = Transactions.Aggregate(StartBalance, (x, y) => x + y.ConvertTo(Currency));
+            CurrBalance = Transactions.Aggregate(StartBalance, (x, y) => x + y.ConvertTo(_currency));
 
         }
 
@@ -192,7 +205,7 @@ namespace ExpenceManagerModels.Wallet
             decimal sum = 0;
             foreach (Transaction transaction in Transactions)
             {
-                if (cond(transaction.Amount) && transaction.DateTime >= dt) sum += transaction.ConvertTo(Currency);
+                if (cond(transaction.Amount) && transaction.DateTime >= dt) sum += transaction.ConvertTo(_currency);
             }
             return sum;
         }

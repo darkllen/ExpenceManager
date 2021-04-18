@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using ExpenceManagerModels.Wallet;
 using Prism.Commands;
@@ -10,6 +12,24 @@ namespace ExpenceManagerWPF.Wallets
     public class WalletDetailsViewModel : BindableBase
     {
         private Wallet _wallet;
+
+        public List<string> PossibleCurrency => Wallet.PossibleCurrency.Keys.ToList();
+
+        public string CurrencyErr { get; set; }
+        public string Currency
+        {
+            get
+            {
+                return _wallet.Currency;
+            }
+            set
+            {
+                _wallet.Currency = value;
+                RaisePropertyChanged();
+                RaisePropertyChanged(nameof(DisplayName));
+                UpdateWalletCommand.RaiseCanExecuteChanged();
+            }
+        }
 
 
         public string Profit
@@ -89,13 +109,7 @@ namespace ExpenceManagerWPF.Wallets
 
 
 
-        public string Currency
-        {
-            get
-            {
-                return _wallet.Currency;
-            }
-        }
+
 
         public string DisplayName
         {
@@ -143,6 +157,17 @@ namespace ExpenceManagerWPF.Wallets
                 DescriptionErr = "";
                 RaisePropertyChanged(nameof(DescriptionErr));
             }
+            if (String.IsNullOrWhiteSpace(Currency))
+            {
+                CurrencyErr = "Choose currency";
+                RaisePropertyChanged(nameof(CurrencyErr));
+                valid = false;
+            }
+            else
+            {
+                CurrencyErr = "";
+                RaisePropertyChanged(nameof(CurrencyErr));
+            }
 
             return valid;
         }
@@ -154,7 +179,7 @@ namespace ExpenceManagerWPF.Wallets
             var service = new WalletService();
             try
             {
-                WalletDb wallet = new WalletDb(_wallet.Guid, _wallet.Name, _wallet.CurrBalance, _wallet.Description,
+                WalletDb wallet = new WalletDb(_wallet.Guid, _wallet.Name, _wallet.StartBalance, _wallet.Description,
                     _wallet.Currency);
                 await service.SaveUpdateWallet(AuthenticationService.CurrentUser, wallet);
             }
