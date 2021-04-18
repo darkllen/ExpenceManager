@@ -12,6 +12,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" >
             <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Amount</TextBlock>
@@ -32,11 +33,17 @@
             <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding CurrentCategoryErr}"></TextBlock>
         </StackPanel>
         <StackPanel  Grid.Row="3">
+            <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Currency</TextBlock>
+            <ComboBox  ItemsSource="{Binding Path=PossibleCurrency}" SelectedValue="{Binding Path=Currency, UpdateSourceTrigger=PropertyChanged}"
+                       Name="TbCurr" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch"></ComboBox>
+            <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding CurrencyErr}"></TextBlock>
+        </StackPanel>
+        <StackPanel  Grid.Row="4">
             <TextBlock HorizontalAlignment="Center" Margin="10, 10, 10, 0">Date</TextBlock>
             <DatePicker SelectedDateFormat="Long" SelectedDate="{Binding DateTime, UpdateSourceTrigger=PropertyChanged}"
                         Name="TbStartBalance" Width="300" Margin="10, 10, 10, 0" HorizontalAlignment="Stretch"></DatePicker>
             <TextBlock HorizontalAlignment="Center" Margin="10, 0, 10, 10" Foreground="Red" Text="{Binding DateTimeErr}"></TextBlock>
         </StackPanel>
-        <Button Grid.Row="4" Command="{Binding UpdateTransactionCommand}">Save changes</Button>
+        <Button Grid.Row="5" Command="{Binding UpdateTransactionCommand}">Save changes</Button>
     </Grid>
 </UserControl>

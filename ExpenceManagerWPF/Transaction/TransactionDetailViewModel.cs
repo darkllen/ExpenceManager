@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using ExpenceManagerModels;
+using ExpenceManagerModels.Wallet;
 using Prism.Commands;
 using Prism.Mvvm;
 using Services;
@@ -14,6 +16,22 @@ namespace ExpenceManagerWPF.Transaction
 
         private Action _update;
 
+        public List<string> PossibleCurrency => Wallet.PossibleCurrency.Keys.ToList();
+
+        public string CurrencyErr { get; set; }
+        public string Currency
+        {
+            get
+            {
+                return _transaction.Currency;
+            }
+            set
+            {
+                _transaction.Currency = value;
+                RaisePropertyChanged();
+                UpdateTransactionCommand.RaiseCanExecuteChanged();
+            }
+        }
 
         public ExpenceManagerModels.Transaction Transaction
         {
@@ -137,6 +155,17 @@ namespace ExpenceManagerWPF.Transaction
             {
                 CurrentCategoryErr = "";
                 RaisePropertyChanged(nameof(CurrentCategoryErr));
+            }
+            if (String.IsNullOrWhiteSpace(Currency))
+            {
+                CurrencyErr = "Choose currency";
+                RaisePropertyChanged(nameof(CurrencyErr));
+                valid = false;
+            }
+            else
+            {
+                CurrencyErr = "";
+                RaisePropertyChanged(nameof(CurrencyErr));
             }
 
             return valid;
