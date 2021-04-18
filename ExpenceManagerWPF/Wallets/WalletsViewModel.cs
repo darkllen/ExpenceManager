@@ -165,7 +165,16 @@ namespace ExpenceManagerWPF.Wallets
                 Wallets.Add(new WalletDetailsViewModel(wallet));
             }
             OnPropertyChanged(nameof(Wallets));
+
+            if (WalletService.CurrentWallet != null)
+            {
+                Transactions = new ObservableCollection<TransactionDetailViewModel>();
+                foreach (var transaction in WalletService.CurrentWallet.GetAllTransactions(AuthenticationService.CurrentUser))
+                    Transactions.Add(new TransactionDetailViewModel(transaction, _update));
+                OnPropertyChanged(nameof(Transactions));
+            }
         }
+        
 
 
         public event PropertyChangedEventHandler PropertyChanged;
